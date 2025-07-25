@@ -1,5 +1,7 @@
-#ifndef SHADER_HPP
-#define SHADER_HPP
+#ifndef SHADERMANAGER_HPP
+#define SHADERMANAGER_HPP
+
+#include <common/Singleton.hpp>
 
 #include <fstream>
 #include <memory>
@@ -8,24 +10,27 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-class ShaderHandler
+class ShaderManager : public Singleton<ShaderManager>
 {
+    friend class Singleton<ShaderManager>;
 private:
-    std::shared_ptr<std::string> vertexShaderSource;
-    unsigned vertexShader;
-    std::shared_ptr<std::string> fragmentShaderSource;
-    unsigned fragmentShader;
+    const std::string shaderDir = "../shaders/";
 
-    unsigned shaderProgram;
+    GLuint ShaderProgram_DEFAULT;
+    GLuint ShaderProgram_TEXT;
 
 public:
-    ShaderHandler();
-    ~ShaderHandler() = default;
-    const char *getVertexShaderSource();
-    unsigned getShaderProgram();
+    GLuint getDefaultShaderProgram();
+    GLuint getTextShaderProgram();
+
+protected:
+    ShaderManager();
+    ~ShaderManager() = default;
 
 private:
-    void init();
+    GLuint makeShaderProgram(const std::string& vertexPath, const std::string& fragmentPath);
+    const char *getVertexShaderSource();
+    void initShaders();
     std::shared_ptr<std::string> loadShaderSource(const std::string& path);
     void compileShader(unsigned int shader, std::shared_ptr<std::string> shaderSource);
 };
@@ -49,4 +54,4 @@ public:
     }
 };
 
-#endif // SHADER_HPP
+#endif // SHADERMANAGER_HPP

@@ -8,15 +8,19 @@
 
 #include "Camera.hpp"
 #include "Cube.hpp"
+#include "TextRenderer.hpp"
 
 class RenderHandler : public Singleton<RenderHandler>
 {
     friend class Singleton<RenderHandler>;
 public:
+    TextRenderer textRenderer;
     Camera camera;
 
 public:
-    void renderScene(unsigned shaderProgram);
+    void renderScene();
+    void renderText(const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font);
+    void renderText(unsigned max_width, const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font);
     Camera& getCamera();
 
 protected:
@@ -24,7 +28,8 @@ protected:
     ~RenderHandler() = default;
 
 private:
-    void renderCube(unsigned shaderProgram);
+    void setUpGLForText(const Font& font);
+    void renderCube(GLuint shaderProgram);
 };
 
 #endif // RENDERHANDLER_HPP

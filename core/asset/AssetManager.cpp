@@ -7,7 +7,7 @@ AssetManager* Singleton<AssetManager>::instance = nullptr;
 
 AssetType AssetManager::detectAssetType(const std::string& filePath)
 {
-    if (filePath.ends_with(".ttf")) return AssetType::Font;
+    if (filePath.ends_with(".png")) return AssetType::Font;
     if (filePath.ends_with(".obj")) return AssetType::Mesh;
     if (filePath.ends_with(".tex")) return AssetType::Texture;
     if (filePath.ends_with(".frag")) return AssetType::Shader;

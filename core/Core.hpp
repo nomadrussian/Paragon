@@ -7,21 +7,16 @@
 #include <memory>
 
 #include "MainWindow.hpp"
-#include "event/CoreEventManager.hpp"
 #include "input/InputHandler.hpp"
 #include "input/KeyboardListener.hpp"
 #include "input/MouseListener.hpp"
-#include "render/RenderHandler.hpp"
-#include "render/ShaderHandler.hpp"
+
 
 class Core : public Singleton<Core>
 {
     friend class Singleton<Core>;
 private:
-    CoreEventManager* coreEventManager = nullptr;
-    RenderHandler* renderHandler = nullptr;
     std::unique_ptr<MainWindow> mainWindow;
-    std::unique_ptr<ShaderHandler> shaderHandler;
     std::unique_ptr<InputHandler> inputHandler;
     std::shared_ptr<KeyboardListener> keyboardListener;
     std::shared_ptr<MouseListener> mouseListener;

@@ -2,7 +2,6 @@
 #define ASSETMANAGER_HPP
 
 #include <common/Singleton.hpp>
-
 #include <util/Log.hpp>
 
 #include <cassert>
@@ -19,6 +18,7 @@
 
 class AssetManager : public Singleton<AssetManager>
 {
+    friend class Singleton<AssetManager>;
 private:
     std::unordered_map<std::string, std::shared_ptr<Asset>> assetCache;
 
@@ -68,7 +68,7 @@ public:
 
         if (assetCache.contains(assetPath))
         {
-            return assetCache[assetPath];
+            return std::dynamic_pointer_cast<AssetT>(assetCache[assetPath]);
         }
 
         AssetType type = detectAssetType(assetPath);

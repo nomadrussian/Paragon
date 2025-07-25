@@ -6,17 +6,24 @@
 
 #include <GLFW/glfw3.h>
 
+#include "asset/AssetManager.hpp"
+#include "event/CoreEventManager.hpp"
+#include "render/RenderHandler.hpp"
+#include "render/ShaderManager.hpp"
+
 template<>
 Core* Singleton<Core>::instance = nullptr;
 
 Core::Core()
 {
+    log_debug("Initializing AssetManager...");
+    AssetManager::init();
+
     log_debug("Initializing graphics...");
     initGraphics();
 
     log_debug("Initializing CoreEventManager...");
     CoreEventManager::init();
-    coreEventManager = &CoreEventManager::getInstance();
 
     log_debug("Initializing InputHandler...");
     inputHandler = std::make_unique<InputHandler>();
@@ -49,12 +56,11 @@ void Core::initGraphics()
     log_debug("Setting up MainWindow...");
     mainWindow = std::make_unique<MainWindow>(1600, 900);
 
-    log_debug("Initializing rendering engine...");
-    RenderHandler::init();
-    renderHandler = &RenderHandler::getInstance();
+    log_debug("Initializing ShaderManager...");
+    ShaderManager::init();
 
-    log_debug("Initializing shader engine...");
-    shaderHandler = std::make_unique<ShaderHandler>();
+    log_debug("Initializing RenderHandler...");
+    RenderHandler::init();
 
     log_debug("Graphics initialization has been completed");
 }
@@ -78,7 +84,8 @@ void Core::run()
         inputHandler->watchForHeldKeys();
 
         applicationInstance->update();
-        renderHandler->renderScene(shaderHandler->getShaderProgram());
+        RenderHandler::getInstance().renderScene();
+        RenderHandler::getInstance().renderText(U"Hello, world!", 100, 100, 32, RenderHandler::getInstance().textRenderer.getConsoleFont());
         mainWindow->refresh();
 
         //log("FPS: " + std::to_string(1.0 / deltaTime));

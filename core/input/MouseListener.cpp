@@ -1,5 +1,6 @@
 #include "MouseListener.hpp"
 
+#include <core/Core.hpp>
 #include <core/event/CoreEventManager.hpp>
 #include <core/event/InputEvent.hpp>
 #include <core/render/Camera.hpp>

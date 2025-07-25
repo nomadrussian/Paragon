@@ -16,10 +16,10 @@ void MainWindow::init()
         throw MainWindowInitException("Failed to init GLFW\n");
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    log_debug("Version: OpenGL 4.3");
+    log_debug("Version: OpenGL 3.3");
 
     vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 

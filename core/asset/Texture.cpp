@@ -10,7 +10,7 @@ Texture::~Texture()
 
 }
 
-bool Texture::loadFromData(const std::vector<uint8_t>& data)
+bool Texture::loadFromData(const std::vector<uint8_t>& rawData)
 {
 
 }
@@ -20,7 +20,7 @@ void Texture::unload()
 
 }
 
-AssetType Texture::getType()
+AssetType Texture::getType() const
 {
 
 }

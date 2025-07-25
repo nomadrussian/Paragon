@@ -10,7 +10,7 @@ Shader::~Shader()
 
 }
 
-bool Shader::loadFromData(const std::vector<uint8_t>& data)
+bool Shader::loadFromData(const std::vector<uint8_t>& rawData)
 {
 
 }
@@ -20,7 +20,7 @@ void Shader::unload()
 
 }
 
-AssetType Shader::getType()
+AssetType Shader::getType() const
 {
 
 }

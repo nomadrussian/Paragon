@@ -2,7 +2,6 @@
 #define MESH_HPP
 
 #include "Asset.hpp"
-#include "AssetManager.hpp"
 
 class Mesh : public Asset
 {
@@ -11,9 +10,9 @@ public:
     Mesh();
     ~Mesh();
 private:
-    bool loadFromData(const std::vector<uint8_t>& data) override;
-    void unload();
-    AssetType getType();
+    bool loadFromData(const std::vector<uint8_t>& rawData) override;
+    void unload() override;
+    AssetType getType() const override;
 };
 
 #endif // MESH_HPP

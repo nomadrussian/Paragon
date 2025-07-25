@@ -13,7 +13,21 @@ file(GLOB CORE_SOURCES
 
 add_library(core SHARED ${CORE_SOURCES})
 
-target_include_directories(core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(core
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${SRC_ROOT}/external/include
+)
 
 find_package(GLEW REQUIRED)
-target_link_libraries(core PRIVATE common util glfw GLEW::GLEW GL X11 pthread Xrandr Xi dl)
+target_link_libraries(core
+    PRIVATE
+        common util
+        glfw GLEW::GLEW GL X11 pthread Xrandr Xi dl
+)
+
+set_target_properties(core
+    PROPERTIES
+        INSTALL_RPATH "$ORIGIN/../external"
+        BUILD_RPATH "$ORIGIN/../external"
+)

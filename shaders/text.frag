@@ -1,21 +1,22 @@
 #version 330 core
-in vec2 fragUV;
+in vec2 texCoord;
+
 out vec4 fragColor;
 
-uniform sampler2D fontAtlas;
-uniform vec4 textColor;
-uniform float pxRange;
-uniform float pixelBias;
+uniform sampler2D atlasTexture;
+uniform float distanceRange;
 
-float median(float r, float g, float b) {
-    return max(min(r,g), min(max(r,g), b));
+float median(vec3 a)
+{
+    return max(min(a.x, a.y), min(max(a.x, a.y), a.z));
 }
 
-void main() {
-    vec3 sample = texture(fontAtlas, fragUV).rgb;
-    float sd = median(sample.r, sample.g, sample.b);
-    float screenDist = sd * pxRange - pxRange * 0.5 + pixelBias;
-    float smoothing = fwidth(screenDist);
-    float alpha = smoothstep(-smoothing, smoothing, screenDist);
-    fragColor = vec4(textColor.rgb, alpha * textColor.a);
+void main()
+{
+    vec3 pixel = texture(atlasTexture, vec2(texCoord.x, 1.0 - texCoord.y)).rgb;
+    float signedDistance = median(pixel);
+    float screenSignedDistance = (signedDistance - 0.5) * distanceRange;
+    float antiAliasingWidth = fwidth(screenSignedDistance);
+    float alpha = smoothstep(-antiAliasingWidth, antiAliasingWidth, screenSignedDistance);
+    fragColor = vec4(1.0, 1.0, 1.0, alpha);
 }

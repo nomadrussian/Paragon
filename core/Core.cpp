@@ -85,7 +85,21 @@ void Core::run()
 
         applicationInstance->update();
         RenderHandler::getInstance().renderScene();
-        RenderHandler::getInstance().renderText(U"Hello, world!", 100, 100, 32, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", 10, 50, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ", 10, 100, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſ", 10, 150, 18, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"ƀƁƂƃƄƅƆㄈƇƈƉƊƋƌƍƎƏƐƑƒƓƔƕƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƦƧƨƩƪƫƬƭƮƯưƱƲƳƴƵƶƷƸƹƺƻƼƽƾƿǀǁǂǃǄǅǆǇǈǉǊǋǌǍǎǄǅǆǇǈǉǊǋǌǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩǪǫǬǭǮǯǰǱǲǳǴǵǶǷǸǹǺǼǽǾǿȀȁȂȃȄȅȆȇȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțȜȝȞȟȠȡȢȣȤȥȦȧȨȩȪȫȬȭȮȯȰȱȲȳȴȵȶȷȸȹȺȻȼȽȾȿ", 10, 200, 13, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"           ‐‑‒–—―‖‗―‗†‡•‣․‥…‧‰                      ′″‴‵‶‷‸‹›‼‽⁇⁈⁉℀℁℃℉№™Ω℩℮ℯℰℱℲℳℴℵℶℷℸℹ℺℻ℼℽℾℿ", 10, 250, 32, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"⁰ⁱ⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎", 10, 300, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"€", 10, 350, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"£", 10, 400, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"℀℁ℂ℃℄℅℆ℇ℈℉ℊℋℐℑℒℓ℔ℕ№℗℘ℙℚℛℜ℞℟℠℡™℣ℤ℥Ω℧ℨ℩KÅℬℭ℮ℯℰℱℲℳℴℵℶℷℸℹ℺℻ℼℽℾℿ", 10, 450, 12, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳∴∵∶∷∽∸∹∺∻∼∾∿≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟≠≡≢≣≤≥≦≧≨≩≪≫≬≭≮≯≰≱≲≳≴≵≶≷≸≹≺≻≼≽≾≿⊀⊁⊂⊃⊄⊅⊆⊇⊈⊉⊊⊋⊌⊍⊎⊏⊐⊑⊒⊓⊔⊕⊖⊗⊘⊙⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊤⊥", 10, 500, 12, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"ЀЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѠѡѢѣѤѥѦѧѨѩѪѫѬѭѮѯѰѱѲѳѴѵѶѷѸѹѺѻѼѽѾѿҀҁ҂҃҄҅҆҇҈҉ҊҋҌҍҎҏҐґҒғҔҕҖҗҘҙҚқҜҝҞҟҠҡҢңҤҥҦҧҨҩҪҫҬҭҮүҰұҲҳҴҵҶҷҸҹҺһҼҽҾҿ", 10, 550, 13, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"ԀԁԂԃԄԅԆԇԈԉԊԋԌԍԎԏԐԑԒԓԔԕԖԗԘԙԚԛԜԝԞԟԠԡԢԣԤԥԦԧԨԩԪԫԬԭԮԯ", 10, 600, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"ꙀꙁꙂꙃꙄꙅꙆꙇꙈꙉꙊꙋꙌꙍꙎꙏꙐꙑꙒꙓꙔꙕꙖꙗꙘꙙꙚꙛꙜꙝꙞꙟꙠꙡꙢꙣꙤꙥꙦꙧꙨꙩꙪꙫꙬꙭꙮ꙯꙰꙱꙲꙳ꙴꙵꙶꙷꙸꙹꙺꙻ꙼꙽꙾ꙿ", 10, 650, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"ᲀᲁᲂᲃᲄᲅᲆᲇᲈᲉ", 10, 700, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
+        RenderHandler::getInstance().renderText(U"̛̀́̂̃̄̅̆̇̈̉̊̋̌̍̎̏̐̑̒̓̔̕̚◌͡", 10, 750, 22, RenderHandler::getInstance().textRenderer.getConsoleFont());
         mainWindow->refresh();
 
         //log("FPS: " + std::to_string(1.0 / deltaTime));

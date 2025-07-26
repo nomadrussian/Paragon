@@ -19,9 +19,11 @@ RenderHandler::RenderHandler()
 
 void RenderHandler::renderScene()
 {
+    glDepthMask(GL_TRUE);
     glClearColor(0.8f, 0.75f, 0.74f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
 
     GLuint defaultShaderProgram = ShaderManager::getInstance().getDefaultShaderProgram();
 
@@ -40,49 +42,40 @@ void RenderHandler::renderCube(GLuint shaderProgram)
     GLint cubeLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
     glUniformMatrix4fv(cubeLocation, 1, GL_FALSE, glm::value_ptr(Cube::getInstance().getModelMatrix()));
     glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
 }
 
-void RenderHandler::renderText(const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font)
+void RenderHandler::renderText(const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font)
 {
     glDepthMask(GL_FALSE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    setUpGLForText(font);
-    textRenderer.renderString(0, string, x, y, font_size, font);
-    glDepthMask(GL_TRUE);
+    renderText(0, string, x, y, print_font_size, font);
     glDisable(GL_BLEND);
 }
 
-void RenderHandler::renderText(unsigned max_width, const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font)
-{
-    glDepthMask(GL_FALSE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    setUpGLForText(font);
-    textRenderer.renderString(max_width, string, x, y, font_size, font);
-    glDepthMask(GL_TRUE);
-    glDisable(GL_BLEND);
-}
-
-void RenderHandler::setUpGLForText(const Font& font)
+void RenderHandler::renderText(unsigned max_width, const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font)
 {
     GLuint textShaderProgram = ShaderManager::getInstance().getTextShaderProgram();
+    glm::mat4 projection = glm::ortho(0.0f, 1600.0f, 0.0f, 900.0f, 0.0f, 1.0f);
+    GLint projectionLoc = glGetUniformLocation(textShaderProgram, "projection");
+    GLint textureLoc = glGetUniformLocation(textShaderProgram, "atlasTexture");
+    GLint distanceRangeLoc = glGetUniformLocation(textShaderProgram, "distanceRange");
 
     glBindVertexArray(font.getVAO());
-    glBindBuffer(GL_ARRAY_BUFFER, font.getVBO());
-    glBufferData(GL_ARRAY_BUFFER, 6 * 4 * sizeof(float), NULL, GL_DYNAMIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-
-    glm::mat4 projection = glm::ortho(0.0f, 1600.0f, 0.0f, 900.0f);
-    glUseProgram(textShaderProgram);
-    glUniformMatrix4fv(glGetUniformLocation(textShaderProgram, "projection"), 1, GL_FALSE, &projection[0][0]);
-    glUniform4f(glGetUniformLocation(textShaderProgram, "textColor"), 1.0f, 1.0f, 1.0f, 1.0f);
-
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, font.getAtlasTexture());
+
+    glUseProgram(textShaderProgram);
+
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform1i(textureLoc, 0);
+    glUniform1f(distanceRangeLoc, font.getDistanceRange());
+
+    textRenderer.renderString(max_width, string, x, y, print_font_size, font);
+
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 Camera& RenderHandler::getCamera()

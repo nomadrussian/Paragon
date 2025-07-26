@@ -11,7 +11,6 @@ public:
     ~Shader();
 private:
     bool loadFromData(const std::vector<uint8_t>& rawData) override;
-    void unload() override;
     AssetType getType() const override;
 };
 

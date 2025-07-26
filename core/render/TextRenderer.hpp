@@ -28,7 +28,7 @@ public:
     TextRenderer();
     ~TextRenderer() = default;
     void initFonts();
-    void renderString(unsigned max_width, const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font);
+    void renderString(unsigned max_width, const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font);
     const Font& getConsoleFont();
     const Font& getUIFont();
 };

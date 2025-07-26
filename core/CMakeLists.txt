@@ -31,3 +31,18 @@ set_target_properties(core
         INSTALL_RPATH "$ORIGIN/../external"
         BUILD_RPATH "$ORIGIN/../external"
 )
+
+add_custom_command(
+    TARGET core POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/data
+            ${CMAKE_CURRENT_BINARY_DIR}/../data
+)
+
+add_custom_command(
+    TARGET core POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/shaders
+            ${CMAKE_CURRENT_BINARY_DIR}/../shaders
+)
+

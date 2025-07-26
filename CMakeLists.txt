@@ -23,13 +23,3 @@ add_subdirectory(util)
 add_subdirectory(core)
 add_subdirectory(ParagonApp)
 add_subdirectory(ParagonEditorApp)
-
-file(COPY
-    "${CMAKE_SOURCE_DIR}/shaders"
-    DESTINATION "${CMAKE_BINARY_DIR}"
-)
-
-file(COPY
-    "${CMAKE_SOURCE_DIR}/data"
-    DESTINATION "${CMAKE_BINARY_DIR}"
-)

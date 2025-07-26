@@ -19,8 +19,8 @@ public:
 
 public:
     void renderScene();
-    void renderText(const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font);
-    void renderText(unsigned max_width, const std::u32string& string, unsigned x, unsigned y, unsigned font_size, const Font& font);
+    void renderText(const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font);
+    void renderText(unsigned max_width, const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font);
     Camera& getCamera();
 
 protected:
@@ -28,7 +28,6 @@ protected:
     ~RenderHandler() = default;
 
 private:
-    void setUpGLForText(const Font& font);
     void renderCube(GLuint shaderProgram);
 };
 

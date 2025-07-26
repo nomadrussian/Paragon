@@ -15,15 +15,15 @@ enum class AssetType
 
 class Asset
 {
+    friend class AssetManager;
 protected:
     std::string assetPath;
 public:
     Asset() = default;
     virtual ~Asset() = default;
-public:
-    virtual bool loadFromData(const std::vector<uint8_t>& rawData) = 0;
-    virtual void unload() = 0;
     virtual AssetType getType() const = 0;
+protected:
+    virtual bool loadFromData(const std::vector<uint8_t>& rawData) = 0;
 };
 
 #endif // ASSET_HPP

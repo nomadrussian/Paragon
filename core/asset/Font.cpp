@@ -13,6 +13,13 @@ Font::Font()
 
 Font::~Font()
 {
+    glDeleteTextures(1, &atlasTexture);
+    glDeleteVertexArrays(1, &atlasVAO);
+    glDeleteBuffers(1, &atlasVBO);
+    atlasTexture = 0;
+    atlasVAO = 0;
+    atlasVBO = 0;
+    atlas.clear();
 }
 
 bool Font::loadFromData(const std::vector<uint8_t>& rawData)
@@ -25,24 +32,26 @@ bool Font::loadFromData(const std::vector<uint8_t>& rawData)
         return false;
     }
 
-    glGenVertexArrays(1, &atlasVAO);
     glGenBuffers(1, &atlasVBO);
-
+    glGenVertexArrays(1, &atlasVAO);
     glBindVertexArray(atlasVAO);
     glBindBuffer(GL_ARRAY_BUFFER, atlasVBO);
-    glBufferData(GL_ARRAY_BUFFER, 6 * 4 * sizeof(float), NULL, GL_DYNAMIC_DRAW);
-
+    glBufferData(GL_ARRAY_BUFFER, 6 * 4 * sizeof(float), NULL, GL_DYNAMIC_DRAW); // 6 vertices for a squad
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*) 0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*) (2 * sizeof(float)));
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(0));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 
     glGenTextures(1, &atlasTexture);
     glBindTexture(GL_TEXTURE_2D, atlasTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, atlasWidth, atlasHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, atlasWidth, atlasHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     stbi_image_free(data);
 
     return true;
@@ -88,7 +97,7 @@ bool Font::loadAtlasMetadata(const std::string& filePath)
     {
         if (!entry.contains("unicode")) continue;
 
-        char32_t c = entry["unicode"].get<char>();
+        char32_t c = entry["unicode"].get<char32_t>();
 
         /* Sample of what is being parsed here
         {
@@ -134,17 +143,6 @@ bool Font::loadAtlasMetadata(const std::string& filePath)
     return true;
 }
 
-void Font::unload()
-{
-    glDeleteTextures(1, &atlasTexture);
-    glDeleteVertexArrays(1, &atlasVAO);
-    glDeleteBuffers(1, &atlasVBO);
-    atlasTexture = 0;
-    atlasVAO = 0;
-    atlasVBO = 0;
-    atlas.clear();
-}
-
 AssetType Font::getType() const
 {
     return AssetType::Font;
@@ -159,6 +157,7 @@ const Glyph& Font::getGlyph(char32_t c) const
 
     return atlas.at(c);
 }
+
 GLuint Font::getAtlasTexture() const
 {
     return atlasTexture;
@@ -172,4 +171,14 @@ GLuint Font::getVBO() const
 GLuint Font::getVAO() const
 {
     return atlasVAO;
+}
+
+int Font::getDistanceRange() const
+{
+    return distanceRange;
+}
+
+int Font::getSize() const
+{
+    return size;
 }

@@ -38,10 +38,11 @@ public:
     GLuint getAtlasTexture() const;
     GLuint getVBO() const;
     GLuint getVAO() const;
+    int getDistanceRange() const;
+    int getSize() const;
 
-private:
+protected:
     bool loadFromData(const std::vector<uint8_t>& rawData) override;
-    void unload() override;
     AssetType getType() const override;
 };
 

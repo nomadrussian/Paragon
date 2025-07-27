@@ -148,6 +148,11 @@ AssetType Font::getType() const
     return AssetType::Font;
 }
 
+const Glyph& Font::getGlyph(char c) const
+{
+    return getGlyph(static_cast<char32_t>(c));
+}
+
 const Glyph& Font::getGlyph(char32_t c) const
 {
     if (atlas.find(c) == atlas.end())

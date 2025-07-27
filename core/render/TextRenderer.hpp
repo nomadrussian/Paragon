@@ -17,20 +17,24 @@ private:
     std::string fontDir = "../data/font/";
 
     Font fontConsole;
-    std::string fontConsolePath = "JetBrainsMono/JetBrains-VariableFont-atlas.png";
-    std::string fontConsoleMetadataPath = "JetBrainsMono/JetBrains-VariableFont-atlas.json";
+    std::string fontConsolePath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.png";
+    std::string fontConsoleMetadataPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.json";
 
     Font fontUI;
-    std::string fontUIPath = "JetBrainsMono/JetBrains-VariableFont-atlas.png";
-    std::string fontUIMetadataPath = "JetBrainsMono/JetBrains-VariableFont-atlas.json";
+    std::string fontUIPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.png";
+    std::string fontUIMetadataPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.json";
 
 public:
     TextRenderer();
     ~TextRenderer() = default;
     void initFonts();
-    void renderString(unsigned max_width, const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font);
-    const Font& getConsoleFont();
-    const Font& getUIFont();
+    void renderString(unsigned maxWidth, const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font);
+    void renderString(unsigned maxWidth, const std::u32string& unicodeString, int x, int y, unsigned fontPrintedSize, const Font& font);
+    const Font& getConsoleFont() const;
+    const Font& getUIFont() const;
+
+private:
+    void renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale, const Font& font);
 };
 
 #endif // TEXTRENDERER_HPP

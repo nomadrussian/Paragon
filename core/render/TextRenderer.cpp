@@ -29,43 +29,85 @@ void TextRenderer::initFonts()
     }
 }
 
-void TextRenderer::renderString(unsigned max_width, const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font)
+void TextRenderer::renderString(unsigned maxWidth, const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font)
 {
-    for (char32_t c : string)
+    int startX = x;
+
+    for (char c : string)
     {
+        if (c == '\n')
+        {
+            x = startX;
+            y -= fontPrintedSize;
+            continue;
+        }
+
         Glyph g = font.getGlyph(c);
 
-        float _x = x + g.xMin * print_font_size;
-        float _y = y + g.yMin * print_font_size;
-        float gw = (g.xMax - g.xMin) * print_font_size;
-        float gh = (g.yMax - g.yMin) * print_font_size;
-
-        float vertices[6][4]
+        if (maxWidth > 0 && (x + g.advance * fontPrintedSize) - startX > maxWidth)
         {
-            { _x     , _y     , g.u0, g.v0 },
-            { _x + gw, _y     , g.u1, g.v0 },
-            { _x     , _y + gh, g.u0, g.v1 },
-            { _x     , _y + gh, g.u0, g.v1 },
-            { _x + gw, _y + gh, g.u1, g.v1 },
-            { _x + gw, _y     , g.u1, g.v0 }
-        };
+            x = startX;
+            y -= fontPrintedSize;
+        }
 
-        glBindBuffer(GL_ARRAY_BUFFER, font.getVBO());
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-
-        x += g.advance * print_font_size;
+        renderGlyph(g, x, y, fontPrintedSize, font);
+        x += g.advance * fontPrintedSize;
     }
 }
 
-const Font& TextRenderer::getConsoleFont()
+void TextRenderer::renderString(unsigned maxWidth, const std::u32string& unicodeString, int x, int y, unsigned fontPrintedSize, const Font& font)
+{
+    int startX = x;
+
+    for (char32_t c : unicodeString)
+    {
+        if (c == '\n')
+        {
+            x = startX;
+            y -= fontPrintedSize;
+            continue;
+        }
+
+        Glyph g = font.getGlyph(c);
+
+        if (maxWidth > 0 && (x + g.advance * fontPrintedSize) - startX > maxWidth)
+        {
+            x = startX;
+            y -= fontPrintedSize;
+        }
+
+        renderGlyph(g, x, y, fontPrintedSize, font);
+        x += g.advance * fontPrintedSize;
+    }
+}
+
+void TextRenderer::renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale, const Font& font)
+{
+    float _x = x + g.xMin * scale;
+    float _y = y + g.yMin * scale;
+    float gw = (g.xMax - g.xMin) * scale;
+    float gh = (g.yMax - g.yMin) * scale;
+
+    float vertices[6][4]
+    {
+        { _x     , _y     , g.u0, g.v0 },
+        { _x + gw, _y     , g.u1, g.v0 },
+        { _x     , _y + gh, g.u0, g.v1 },
+        { _x     , _y + gh, g.u0, g.v1 },
+        { _x + gw, _y + gh, g.u1, g.v1 },
+        { _x + gw, _y     , g.u1, g.v0 }
+    };
+
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+const Font& TextRenderer::getConsoleFont() const
 {
     return fontConsole;
 }
 
-const Font& TextRenderer::getUIFont()
+const Font& TextRenderer::getUIFont() const
 {
     return fontUI;
 }

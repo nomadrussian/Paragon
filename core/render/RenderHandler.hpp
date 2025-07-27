@@ -7,20 +7,23 @@
 #include <GL/glew.h>
 
 #include "Camera.hpp"
-#include "Cube.hpp"
+#include "../Cube.hpp"
 #include "TextRenderer.hpp"
 
 class RenderHandler : public Singleton<RenderHandler>
 {
     friend class Singleton<RenderHandler>;
-public:
-    TextRenderer textRenderer;
+private:
     Camera camera;
+    TextRenderer textRenderer;
 
 public:
     void renderScene();
-    void renderText(const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font);
-    void renderText(unsigned max_width, const std::u32string& string, int x, int y, unsigned print_font_size, const Font& font);
+    void renderText(const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font);
+    void renderText(const std::u32string& unicodeString, int x, int y, unsigned fontPrintedSize, const Font& font);
+    void renderText(unsigned maxWidth, const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font);
+    void renderText(unsigned maxWidth, const std::u32string& unicodeString, int x, int y, unsigned fontPrintedSize, const Font& font);
+    const TextRenderer& getTextRenderer();
     Camera& getCamera();
 
 protected:
@@ -29,6 +32,8 @@ protected:
 
 private:
     void renderCube(GLuint shaderProgram);
+    void setUpOpenGLForText(const Font& font);
+    void clearOpenGLAfterText();
 };
 
 #endif // RENDERHANDLER_HPP

@@ -7,7 +7,7 @@
 
 #include "ApplicationScene.hpp"
 
-enum ApplicationType {
+enum class ApplicationType {
     PARAGON,
     EDITOR
 };

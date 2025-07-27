@@ -1,0 +1,9 @@
+{
+    "RESOLUTION_WIDTH": 1600,
+    "RESOLUTION_HEIGHT": 900,
+    "ASPECT": 1.77777778,
+    "FULLSCREEN": false,
+    "VSYNC": true,
+    "MSAA": 1,
+    "FOV": 80.0
+}

@@ -34,6 +34,7 @@ public:
     Font();
     ~Font() override;
     bool loadAtlasMetadata(const std::string& filePath);
+    const Glyph& getGlyph(char c) const;
     const Glyph& getGlyph(char32_t c) const;
     GLuint getAtlasTexture() const;
     GLuint getVBO() const;

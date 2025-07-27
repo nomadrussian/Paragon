@@ -15,11 +15,12 @@ class Camera
 
 public:
     Camera();
-    glm::mat4 getFPVViewMatrix() const;
-    glm::mat4 getFPVProjectionMatrix() const;
     void move(glm::vec3 delta_position);
     void rotate(glm::vec3 delta_orientation);
-    glm::vec3 getOrientation();
+    glm::mat4 getFPVViewMatrix() const;
+    glm::mat4 getFPVProjectionMatrix() const;
+    glm::vec3 getPosition() const;
+    glm::vec3 getOrientation() const;
 
 private:
     void setDirectionVector();

@@ -3,6 +3,8 @@ file(GLOB CORE_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/asset/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/asset/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/config/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/config/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/event/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/event/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/input/*.hpp"
@@ -46,3 +48,9 @@ add_custom_command(
             ${CMAKE_CURRENT_BINARY_DIR}/../shaders
 )
 
+add_custom_command(
+    TARGET core POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/config
+            ${CMAKE_CURRENT_BINARY_DIR}/../config
+)

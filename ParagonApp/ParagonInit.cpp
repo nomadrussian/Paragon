@@ -1,6 +1,7 @@
 #include "ParagonApplication.hpp"
 
 #include <core/Core.hpp>
+#include <core/config/GraphicsConfig.hpp>
 #include <util/Log.hpp>
 
 #include <exception>
@@ -14,12 +15,18 @@ int main()
 
     log_debug("Starting Paragon...");
 
-    try {
+    log_debug("Setting up graphics configuration...");
+    GraphicsConfig::loadConfig("../config/graphics.json");
+
+    try
+    {
         log_debug("Initializing Core...");
         Core::init();
         log_debug("Creating Paragon instance...");
         paragonApp = std::make_unique<ParagonApplication>();
-    }  catch (const std::exception& e) {
+    }
+    catch (const std::exception& e)
+    {
         log_error(std::string("Failed to launch: ") + e.what());
         return -1;
     }
@@ -29,10 +36,13 @@ int main()
     log_debug("Connecting Paragon to Core...");
     core->setApplicationInstance(std::move(paragonApp));
 
-    try {
+    try
+    {
         log_debug("Launching Core...");
         core->run();
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e)
+    {
         log_error(std::string("Fatal exception while running Paragon: ") + e.what());
     }
 

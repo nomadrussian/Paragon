@@ -10,13 +10,10 @@
 class MainWindow
 {
 private:
-    const GLFWvidmode *vidmode;
     GLFWwindow *window;
-    unsigned width;
-    unsigned height;
 
 public:
-    MainWindow(unsigned w, unsigned h);
+    MainWindow();
     ~MainWindow() = default;
     void refresh();
     GLFWwindow* getGLFWwindow();

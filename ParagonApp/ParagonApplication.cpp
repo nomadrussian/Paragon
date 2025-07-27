@@ -18,7 +18,7 @@ void ParagonApplication::init()
 
 ApplicationType ParagonApplication::getApplicationType() const
 {
-    return PARAGON;
+    return ApplicationType::PARAGON;
 }
 
 void ParagonApplication::update()

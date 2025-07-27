@@ -1,5 +1,6 @@
 #include "Camera.hpp"
 
+#include <config/GraphicsConfig.hpp>
 #include <util/Log.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -7,16 +8,6 @@
 Camera::Camera()
 {
     setDirectionVector();
-}
-
-glm::mat4 Camera::getFPVViewMatrix() const
-{
-    return glm::lookAt(position, position + direction, worldUp);
-}
-
-glm::mat4 Camera::getFPVProjectionMatrix() const
-{
-    return glm::perspective(glm::radians(60.0f), 16.0f / 9.0f, 0.1f, 100.0f);
 }
 
 void Camera::move(glm::vec3 delta_position)
@@ -27,8 +18,27 @@ void Camera::move(glm::vec3 delta_position)
 void Camera::rotate(glm::vec3 delta_orientation)
 {
     orientation += delta_orientation;
-    if(orientation.x > 89.0f) orientation.x = 89.0f;
-    if(orientation.x < -89.0f) orientation.x = -89.0f;
+    if (orientation.x > 89.0f)
+    {
+        orientation.x = 89.0f;
+    }
+    else if (orientation.x < -89.0f)
+    {
+        orientation.x = -89.0f;
+    }
+
+    /*if (orientation.y > 180)
+    {
+        orientation.y = fmod(orientation.y, -180.0);
+    }
+    else if (orientation.y < -180)
+    {
+        orientation.y = fmod(orientation.y, 180.0);
+    }*/
+
+    while (orientation.y > 180) orientation.y -= 360;
+    while (orientation.y < -180) orientation.y += 360;
+
     setDirectionVector();
 }
 
@@ -40,7 +50,22 @@ void Camera::setDirectionVector()
     direction = glm::normalize(direction);
 }
 
-glm::vec3 Camera::getOrientation()
+glm::mat4 Camera::getFPVViewMatrix() const
+{
+    return glm::lookAt(position, position + direction, worldUp);
+}
+
+glm::mat4 Camera::getFPVProjectionMatrix() const
+{
+    return glm::perspective(glm::radians(GraphicsConfig::FOV), GraphicsConfig::ASPECT, 0.1f, 100.0f);
+}
+
+glm::vec3 Camera::getPosition() const
+{
+    return position;
+}
+
+glm::vec3 Camera::getOrientation() const
 {
     return orientation;
 }

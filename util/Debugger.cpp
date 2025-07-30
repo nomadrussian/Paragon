@@ -37,7 +37,7 @@ void Debugger::renderDebugScreen()
         std::to_string(RenderHandler::getInstance().getCamera().getPosition().x) + std::string("\n") +
         std::to_string(RenderHandler::getInstance().getCamera().getPosition().y) + std::string("\n") +
         std::to_string(RenderHandler::getInstance().getCamera().getPosition().z),
-        4 + scale * 13,
+        4 + scale * 9,
         screenH - scale * step,
         scale,
         font

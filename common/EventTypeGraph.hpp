@@ -17,11 +17,11 @@ private:
     std::unordered_map<std::type_index, std::type_index> eventPredecessorMap;
 public:
     virtual ~EventTypeGraph() = default;
-    bool matchesType(std::type_index matchID, std::type_index typeID);
+    bool matchesType(const std::type_index& matchID, std::type_index typeID) const;
 
 protected:
     EventTypeGraph() = default;
-    void addDependency(std::type_index baseTypeID, std::type_index derivedTypeID);
+    void addDependency(const std::type_index& baseTypeID, const std::type_index& derivedTypeID);
 };
 
 #endif // EVENTTYPEGRAPH_HPP

@@ -1,5 +1,5 @@
-#ifndef COREEVENTTYPEGRAPH_HPP
-#define COREEVENTTYPEGRAPH_HPP
+#ifndef PARAGONEVENTTYPEGRAPH_HPP
+#define PARAGONEVENTTYPEGRAPH_HPP
 
 #include <common/EventTypeGraph.hpp>
 #include <common/Singleton.hpp>
@@ -12,4 +12,4 @@ protected:
     ~ParagonEventTypeGraph() = default;
 };
 
-#endif // COREEVENTTYPEGRAPH_HPP
+#endif // PARAGONEVENTTYPEGRAPH_HPP

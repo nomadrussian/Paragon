@@ -6,7 +6,7 @@
 
 #include "Singleton.hpp"
 
-void EventTypeGraph::addDependency(std::type_index baseTypeID, std::type_index derivedTypeID)
+void EventTypeGraph::addDependency(const std::type_index& baseTypeID, const std::type_index& derivedTypeID)
 {
     assert(
         eventPredecessorMap.find(derivedTypeID) == eventPredecessorMap.end() &&
@@ -18,7 +18,7 @@ void EventTypeGraph::addDependency(std::type_index baseTypeID, std::type_index d
     eventPredecessorMap.insert(std::pair<std::type_index, std::type_index>(newDependency));
 }
 
-bool EventTypeGraph::matchesType(std::type_index matchID, std::type_index typeID)
+bool EventTypeGraph::matchesType(const std::type_index& matchID, std::type_index typeID) const
 {
     if(typeID == matchID)
     {

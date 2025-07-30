@@ -4,12 +4,11 @@
 #include <util/FileManager.hpp>
 #include <util/Log.hpp>
 
-template<>
-GraphicsConfig* Singleton<GraphicsConfig>::instance = nullptr;
+#include <glm/glm.hpp>
 
 dimensions2D GraphicsConfig::RESOLUTION = { 1024, 768 };
 float GraphicsConfig::ASPECT = 1.3333333f;
-float GraphicsConfig::FOV = 47.0f;
+float GraphicsConfig::FOV_VERTICAL = 47.0f;
 bool GraphicsConfig::FULLSCREEN = false;
 bool GraphicsConfig::VSYNC = true;
 unsigned GraphicsConfig::MSAA = 1;
@@ -17,7 +16,6 @@ unsigned GraphicsConfig::MSAA = 1;
 #ifdef PARAGON_DEBUG
 bool GraphicsConfig::DEBUG_SCREEN = true;
 #endif
-
 
 void GraphicsConfig::loadConfig(std::string configFilePath)
 {
@@ -46,5 +44,15 @@ void GraphicsConfig::loadConfig(std::string configFilePath)
         unsigned s = configData["MSAA"].get<unsigned>();
         if (s == 2 || s == 4 || s == 8 || s == 16) GraphicsConfig::MSAA = configData["MSAA"].get<unsigned>();
     }
-    if (configData.contains("FOV")) GraphicsConfig::MSAA = 2 * atan(tan(configData["FOV"].get<float>() / 2.0) * ASPECT);
+    if (configData.contains("FOV")) GraphicsConfig::FOV_VERTICAL = glm::degrees(2.0f * atan(tan(glm::radians(configData["FOV"].get<float>()) / 2.0f) / ASPECT));
+}
+
+void GraphicsConfig::resetToDefault()
+{
+    RESOLUTION = { 1280, 720 };
+    ASPECT = 1.7777778f;
+    FOV_VERTICAL = 47.0f;
+    FULLSCREEN = false;
+    VSYNC = true;
+    MSAA = 1;
 }

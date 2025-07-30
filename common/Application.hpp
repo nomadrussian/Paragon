@@ -16,9 +16,10 @@ class Application
 {
 public:
     virtual void init() = 0;
-    virtual ApplicationType getApplicationType() const = 0;
     virtual void update() = 0;
     virtual ~Application() = default;
+    virtual ApplicationType getApplicationType() const = 0;
+    virtual const ApplicationScene& getCurrentScene() const = 0;
 };
 
 #endif // APPLICATION_HPP

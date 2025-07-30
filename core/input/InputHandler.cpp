@@ -11,7 +11,6 @@ static double mousePrevX;
 static double mousePrevY;
 
 InputHandler::InputHandler()
-    : coreEventManager(CoreEventManager::getInstance())
 {
     std::fill(keyIsDown, keyIsDown + GLFW_KEY_LAST + 1, false);
 }
@@ -37,7 +36,7 @@ void InputHandler::watchForHeldKeys()
     {
         if (keyIsDown[i])
         {
-            coreEventManager.postEvent(std::make_shared<KeyboardKeyIsHeldEvent>(i));
+            CoreEventManager::getInstance().postEvent(std::make_shared<KeyboardKeyIsHeldEvent>(i));
         }
     }
 }

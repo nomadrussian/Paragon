@@ -5,16 +5,20 @@
 #include <common/ApplicationScene.hpp>
 
 #include <memory>
+#include <typeindex>
+
+#include "state/ParagonStateManager.hpp"
 
 class ParagonApplication : public Application
 {
 private:
-
+    ParagonStateManager stateManager;
 public:
     ParagonApplication();
     void init() override;
-    ApplicationType getApplicationType() const override;
     void update() override;
+    ApplicationType getApplicationType() const override;
+    const ApplicationScene& getCurrentScene() const override;
 };
 
 #endif // PARAGONAPPLICATION_HPP

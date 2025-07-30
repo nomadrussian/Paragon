@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cassert>
 #include <memory>
+#include <queue>
 #include <typeindex>
 #include <typeinfo>
 #include <unordered_map>
@@ -21,7 +22,8 @@ template <typename BaseEventType, typename EventTypeGraphName>
 class EventManager
 {
 private:
-    std::unordered_map<std::type_index, std::vector<std::shared_ptr<EventListener>>> InputEventListenersMap;
+    std::unordered_map<std::type_index, std::vector<std::shared_ptr<EventListener>>> inputEventListenersMap;
+    std::queue<std::shared_ptr<Event>> eventQueue;
 
 public:
     virtual ~EventManager() = default;
@@ -31,11 +33,11 @@ public:
     {
         static_assert(std::is_base_of<BaseEventType, EventType>::value, "Trying to subscribe to non-BaseEventType");
         const std::type_index eventTypeID = typeid(EventType);
-        auto& list = InputEventListenersMap[eventTypeID];
+        auto& list = inputEventListenersMap[eventTypeID];
 
         if (std::find(list.begin(), list.end(), listener) == list.end())
         {
-            InputEventListenersMap[eventTypeID].push_back(listener);
+            inputEventListenersMap[eventTypeID].push_back(listener);
         } else {
             const EventListener& r_listener = *listener;
             log_warning(
@@ -52,19 +54,33 @@ public:
         // using separate methods to check root event type and then actual event type seems redundant
         if(event->matchesType<BaseEventType>())
         {
+            eventQueue.push(event);
+        } else {
+            log_warning(typeid(*this).name() + std::string(" cannot handle events of type ") + typeid(r_event).name());
+        }
+    }
+
+    void flushEvents()
+    {
+        while (!eventQueue.empty())
+        {
+            const auto& event = eventQueue.front();
+
+            const Event& r_event = *event;
             const std::type_index eventTypeID = typeid(r_event);
-            for(auto list: InputEventListenersMap)
+
+            for(const auto& list: inputEventListenersMap)
             {
                 if(EventTypeGraphName::getInstance().matchesType(list.first, eventTypeID))
                 {
                     for(auto listener: list.second)
                     {
-                        listener->onEvent(*event);
+                        listener->onEvent(r_event);
                     }
                 }
             }
-        } else {
-            log_warning(typeid(*this).name() + std::string(" cannot handle events of type ") + typeid(r_event).name());
+
+            eventQueue.pop();
         }
     }
 

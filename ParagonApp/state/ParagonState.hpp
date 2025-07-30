@@ -7,6 +7,11 @@ class ParagonState : public EventListener
 {
 public:
     ParagonState();
+    virtual ~ParagonState();
+    virtual void onEntry() = 0;
+    virtual void onLeave() = 0;
+    void init() override;
+    void onEvent(const Event& event) override;
 };
 
 #endif // PARAGONSTATE_HPP

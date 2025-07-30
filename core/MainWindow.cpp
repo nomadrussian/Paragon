@@ -21,7 +21,6 @@ void MainWindow::init()
         throw MainWindowInitException("Failed to init GLFW\n");
     }
 
-    glfwSetCursorPos(window, GraphicsConfig::RESOLUTION.WIDTH / 2, GraphicsConfig::RESOLUTION.HEIGHT / 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -70,7 +69,7 @@ void MainWindow::init()
     }
 
     // this option should depend on ParagonState or UIState
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     log_debug("OpenGL has been initialized");
 }

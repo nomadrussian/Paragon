@@ -5,5 +5,5 @@
     "FULLSCREEN": false,
     "VSYNC": true,
     "MSAA": 1,
-    "FOV": 80.0
+    "FOV": 75.0
 }

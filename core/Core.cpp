@@ -90,9 +90,9 @@ void Core::run()
         deltaTime = currentFrameTime - lastFrameTime;
 
         inputHandler->watchForHeldKeys();
-
+        CoreEventManager::getInstance().flushEvents();
         applicationInstance->update();
-        RenderHandler::getInstance().renderScene();
+        RenderHandler::getInstance().renderScene(applicationInstance->getCurrentScene());
 
 #ifdef PARAGON_DEBUG
         Debugger::getInstance().renderDebugScreen();

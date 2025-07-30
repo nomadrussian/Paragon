@@ -27,17 +27,14 @@ void Camera::rotate(glm::vec3 delta_orientation)
         orientation.x = -89.0f;
     }
 
-    /*if (orientation.y > 180)
+    if (orientation.y > 180)
     {
-        orientation.y = fmod(orientation.y, -180.0);
+        orientation.y -= 360;
     }
     else if (orientation.y < -180)
     {
-        orientation.y = fmod(orientation.y, 180.0);
-    }*/
-
-    while (orientation.y > 180) orientation.y -= 360;
-    while (orientation.y < -180) orientation.y += 360;
+        orientation.y += 360;
+    }
 
     setDirectionVector();
 }
@@ -57,7 +54,7 @@ glm::mat4 Camera::getFPVViewMatrix() const
 
 glm::mat4 Camera::getFPVProjectionMatrix() const
 {
-    return glm::perspective(glm::radians(GraphicsConfig::FOV), GraphicsConfig::ASPECT, 0.1f, 100.0f);
+    return glm::perspective(glm::radians(GraphicsConfig::FOV_VERTICAL), GraphicsConfig::ASPECT, 0.1f, 100.0f);
 }
 
 glm::vec3 Camera::getPosition() const

@@ -13,13 +13,11 @@ typedef struct
 
 class GraphicsConfig
 {
-private:
-
 public:
     static dimensions2D RESOLUTION;
     static float ASPECT;
     static bool FULLSCREEN;
-    static float FOV;
+    static float FOV_VERTICAL;
     static bool VSYNC;
     static unsigned MSAA;
 

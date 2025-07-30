@@ -1,8 +1,8 @@
 #include "ParagonScene.hpp"
 
-#include <glm/glm.hpp>
+#include <util/Log.hpp>
 
-#include "../utils/Log.hpp"
+#include <glm/glm.hpp>
 
 ParagonScene::ParagonScene()
 {

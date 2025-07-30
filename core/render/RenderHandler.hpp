@@ -18,7 +18,7 @@ private:
     TextRenderer textRenderer;
 
 public:
-    void renderScene();
+    void renderScene(const ApplicationScene& scene);
     void renderText(const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font);
     void renderText(const std::u32string& unicodeString, int x, int y, unsigned fontPrintedSize, const Font& font);
     void renderText(unsigned maxWidth, const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font);

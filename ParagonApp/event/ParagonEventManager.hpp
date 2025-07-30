@@ -10,6 +10,10 @@
 class ParagonEventManager : public EventManager<ParagonEvent, ParagonEventTypeGraph>, public Singleton<ParagonEventManager>
 {
     friend class Singleton<ParagonEventManager>;
+private:
+
+public:
+
 protected:
     ParagonEventManager() = default;
     ~ParagonEventManager() = default;

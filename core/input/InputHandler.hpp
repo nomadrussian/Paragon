@@ -14,7 +14,6 @@ void processMouseMoveInput(GLFWwindow* window, double xpos, double ypos);
 class InputHandler
 {
 private:
-    CoreEventManager& coreEventManager;
     GLFWwindow* window;
 public:
     InputHandler();

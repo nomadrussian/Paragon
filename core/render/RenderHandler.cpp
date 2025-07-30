@@ -17,7 +17,7 @@ RenderHandler::RenderHandler()
     textRenderer.initFonts();
 }
 
-void RenderHandler::renderScene()
+void RenderHandler::renderScene(const ApplicationScene& scene)
 {
     glDepthMask(GL_TRUE);
     glClearColor(0.8f, 0.75f, 0.74f, 1.0f);

@@ -1,10 +1,16 @@
 file(GLOB PARAGON_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/config/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/config/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/event/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/event/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/scene/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/scene/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/state/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/state/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ui/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ui/*.cpp"
 )
 
 add_executable(ParagonApp ${PARAGON_SOURCES})

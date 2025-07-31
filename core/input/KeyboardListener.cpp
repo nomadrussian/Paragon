@@ -1,9 +1,9 @@
 #include "KeyboardListener.hpp"
 
+#include <core/Core.hpp>
 #include <core/event/CoreEventManager.hpp>
 #include <core/event/CoreEventTypeGraph.hpp>
 #include <core/event/InputEvent.hpp>
-#include <core/render/RenderHandler.hpp>
 #include <util/Log.hpp>
 
 #include <cmath>

@@ -1,7 +1,7 @@
 #ifndef PARAGONSCENE_H
 #define PARAGONSCENE_H
 
-#include "../common/ApplicationScene.hpp"
+#include <common/ApplicationScene.hpp>
 
 #include <memory>
 
@@ -11,7 +11,7 @@ private:
 
 public:
     ParagonScene();
-    ~ParagonScene();
+    virtual ~ParagonScene();
 
 private:
 };

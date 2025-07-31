@@ -1,5 +1,5 @@
-#ifndef PARAGONSTATEEVENT_HPP
-#define PARAGONSTATEEVENT_HPP
+#ifndef PARAGONCHANGESTATEEVENT_HPP
+#define PARAGONCHANGESTATEEVENT_HPP
 
 #include <ParagonApp/state/ParagonState.hpp>
 
@@ -14,4 +14,4 @@ public:
     ParagonStateEvent(const std::type_index& headingTo) : headingTo(headingTo) {}
 };
 
-#endif // PARAGONSTATEEVENT_HPP
+#endif // PARAGONCHANGESTATEEVENT_HPP

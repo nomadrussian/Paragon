@@ -1,5 +1,7 @@
 #include "ParagonState.hpp"
 
+#include <util/Log.hpp>
+
 ParagonState::ParagonState()
 {
 

@@ -1,0 +1,780 @@
+================ FILE: ./config/ParagonConfig.cpp ================
+#include "ParagonConfig.hpp"
+
+#include <external/include/nlohmann_json.hpp>
+#include <util/Log.hpp>
+
+#include <fstream>
+
+float ParagonConfig::TICKRATE = 60.0f;
+
+void ParagonConfig::loadConfig(std::string configFilePath)
+{
+    std::ifstream rawConfigData(configFilePath);
+    if (!rawConfigData)
+    {
+        log_error(std::string("Unable to open graphics config file ") + configFilePath);
+        return;
+    }
+
+    nlohmann::json configData;
+    try {
+        rawConfigData >> configData;
+    }  catch (const nlohmann::json::parse_error& e) {
+        log_error(std::string("Error parsing graphics config from ") + configFilePath);
+        return;
+    }
+
+    if (configData.contains("RESOLUTION_WIDTH")) TICKRATE = configData["TICKRATE"].get<float>();
+}
+
+void ParagonConfig::resetToDefault()
+{
+    TICKRATE = 60.0f;
+}
+
+
+================ FILE: ./config/ParagonConfig.hpp ================
+#ifndef PARAGONCONFIG_HPP
+#define PARAGONCONFIG_HPP
+
+#include <string>
+
+class ParagonConfig
+{
+public:
+    static float TICKRATE;
+
+public:
+    static void loadConfig(std::string configFilePath);
+    static void resetToDefault();
+
+private:
+    ParagonConfig() = default;
+    ~ParagonConfig() = default;
+};
+
+#endif // PARAGONCONFIG_HPP
+
+
+================ FILE: ./event/ParagonChangeStateEvent.hpp ================
+#ifndef PARAGONCHANGESTATEEVENT_HPP
+#define PARAGONCHANGESTATEEVENT_HPP
+
+#include <ParagonApp/state/ParagonState.hpp>
+
+#include <typeindex>
+
+#include "ParagonEvent.hpp"
+
+class ParagonStateEvent : public ParagonEvent
+{
+public:
+    const std::type_index& headingTo;
+    ParagonStateEvent(const std::type_index& headingTo) : headingTo(headingTo) {}
+};
+
+#endif // PARAGONCHANGESTATEEVENT_HPP
+
+
+================ FILE: ./event/ParagonEvent.hpp ================
+#ifndef PARAGONEVENT_HPP
+#define PARAGONEVENT_HPP
+
+#include <common/Event.hpp>
+
+class ParagonEvent : public Event
+{
+public:
+    virtual ~ParagonEvent() = default;
+protected:
+    ParagonEvent() = default;
+};
+
+#endif // PARAGONEVENT_HPP
+
+
+================ FILE: ./event/ParagonEventManager.cpp ================
+#include "ParagonEventManager.hpp"
+
+#include <util/Log.hpp>
+
+#include <cassert>
+#include <string>
+#include <typeinfo>
+
+template<>
+ParagonEventManager* Singleton<ParagonEventManager>::instance = nullptr;
+
+
+================ FILE: ./event/ParagonEventManager.hpp ================
+#ifndef PARAGONEVENTMANAGER_HPP
+#define PARAGONEVENTMANAGER_HPP
+
+#include <common/EventManager.hpp>
+#include <common/Singleton.hpp>
+
+#include "ParagonEvent.hpp"
+#include "ParagonEventTypeGraph.hpp"
+
+class ParagonEventManager : public EventManager<ParagonEvent, ParagonEventTypeGraph>, public Singleton<ParagonEventManager>
+{
+    friend class Singleton<ParagonEventManager>;
+private:
+
+public:
+
+protected:
+    ParagonEventManager() = default;
+    ~ParagonEventManager() = default;
+};
+
+#endif // PARAGONEVENTMANAGER_HPP
+
+
+================ FILE: ./event/ParagonEventTypeGraph.cpp ================
+#include "ParagonEventTypeGraph.hpp"
+
+#include <util/Log.hpp>
+
+template<>
+ParagonEventTypeGraph* Singleton<ParagonEventTypeGraph>::instance = nullptr;
+
+ParagonEventTypeGraph::ParagonEventTypeGraph()
+{
+    // log_debug("Adding ParagonEventTypeGraph dependencies...");
+}
+
+
+================ FILE: ./event/ParagonEventTypeGraph.hpp ================
+#ifndef PARAGONEVENTTYPEGRAPH_HPP
+#define PARAGONEVENTTYPEGRAPH_HPP
+
+#include <common/EventTypeGraph.hpp>
+#include <common/Singleton.hpp>
+
+class ParagonEventTypeGraph : public EventTypeGraph, public Singleton<ParagonEventTypeGraph>
+{
+    friend class Singleton<ParagonEventTypeGraph>;
+protected:
+    ParagonEventTypeGraph();
+    ~ParagonEventTypeGraph() = default;
+};
+
+#endif // PARAGONEVENTTYPEGRAPH_HPP
+
+
+================ FILE: ./ParagonApplication.cpp ================
+#include "ParagonApplication.hpp"
+
+#include <core/Core.hpp>
+#include <core/render/RenderHandler.hpp>
+#include <util/Debugger.hpp>
+#include <util/Log.hpp>
+
+#include "config/ParagonConfig.hpp"
+#include "event/ParagonEventManager.hpp"
+#include "state/ParagonState.hpp"
+#include "state/ParagonStateIntro.hpp"
+
+#include <string>
+
+ParagonApplication::ParagonApplication()
+{
+}
+
+void ParagonApplication::init()
+{
+    log_debug("Initializing ParagonEventManager...");
+    ParagonEventManager::init();
+
+    log_debug("Initializing ParagonStateManager...");
+    stateManager = std::make_unique<ParagonStateManager>();
+
+    log_debug("ParagonApplication has been initialized");
+}
+
+void ParagonApplication::update()
+{
+    if (Core::getInstance().getDeltaTime() >= 1.0f / ParagonConfig::TICKRATE)
+    {
+        ParagonEventManager::getInstance().flushEvents();
+    }
+    // to move: RenderHandler::getInstance().renderText(std::string("State: "), 500, 500, 24, RenderHandler::getInstance().getTextRenderer().getUIFont());
+}
+
+ApplicationType ParagonApplication::getApplicationType() const
+{
+    return ApplicationType::PARAGON;
+}
+
+const ApplicationScene& ParagonApplication::getCurrentScene() const
+{
+    return stateManager->getCurrentScene();
+}
+
+
+================ FILE: ./ParagonApplication.hpp ================
+#ifndef PARAGONAPPLICATION_HPP
+#define PARAGONAPPLICATION_HPP
+
+#include <common/Application.hpp>
+#include <common/ApplicationScene.hpp>
+
+#include <memory>
+#include <typeindex>
+
+#include "state/ParagonStateManager.hpp"
+
+class ParagonApplication : public Application
+{
+private:
+    std::unique_ptr<ParagonStateManager> stateManager;
+public:
+    ParagonApplication();
+    void init() override;
+    void update() override;
+    ApplicationType getApplicationType() const override;
+    const ApplicationScene& getCurrentScene() const;
+};
+
+#endif // PARAGONAPPLICATION_HPP
+
+
+================ FILE: ./ParagonInit.cpp ================
+#include "ParagonApplication.hpp"
+
+#include <core/Core.hpp>
+#include <core/config/GraphicsConfig.hpp>
+#include <util/Log.hpp>
+
+#include <exception>
+#include <iostream>
+#include <memory>
+
+int main()
+{
+    std::unique_ptr<ParagonApplication> paragonApp = nullptr;
+    Core *core = nullptr;
+
+    log_debug("Starting Paragon...");
+
+    log_debug("Setting up graphics configuration...");
+    GraphicsConfig::loadConfig("../config/graphics.json");
+
+    try
+    {
+        log_debug("Initializing Core...");
+        Core::init();
+        log_debug("Creating Paragon instance...");
+        paragonApp = std::make_unique<ParagonApplication>();
+    }
+    catch (const std::exception& e)
+    {
+        log_error(std::string("Failed to launch: ") + e.what());
+        return -1;
+    }
+
+    core = &Core::getInstance();
+
+    log_debug("Connecting Paragon to Core...");
+    core->setApplicationInstance(std::move(paragonApp));
+
+    try
+    {
+        log_debug("Launching Core...");
+        core->run();
+    }
+    catch (const std::exception& e)
+    {
+        log_error(std::string("Fatal exception while running Paragon: ") + e.what());
+    }
+
+    log_debug("Shutting down...");
+
+    return 0;
+}
+
+
+================ FILE: ./scene/EntityManager.cpp ================
+#include "EntityManager.hpp"
+
+EntityManager::EntityManager()
+{
+
+}
+
+
+================ FILE: ./scene/EntityManager.hpp ================
+#ifndef ENTITYMANAGER_HPP
+#define ENTITYMANAGER_HPP
+
+typedef unsigned long long EntityID;
+
+class EntityManager
+{
+private:
+    EntityID nextEntityID = 0;
+public:
+    EntityManager();
+    void createNewEntity();
+    void removeAllEntities();
+};
+
+#endif // ENTITYMANAGER_HPP
+
+
+================ FILE: ./scene/ParagonScene.cpp ================
+#include "ParagonScene.hpp"
+
+#include <util/Log.hpp>
+
+#include <glm/glm.hpp>
+
+ParagonScene::ParagonScene()
+{
+    log_debug("Creating ParagonScene");
+}
+
+ParagonScene::~ParagonScene()
+{
+}
+
+
+================ FILE: ./scene/ParagonScene.hpp ================
+#ifndef PARAGONSCENE_H
+#define PARAGONSCENE_H
+
+#include <common/ApplicationScene.hpp>
+
+#include <memory>
+
+class ParagonScene : public ApplicationScene
+{
+private:
+
+public:
+    ParagonScene();
+    virtual ~ParagonScene();
+
+private:
+};
+
+#endif // PARAGONSCENE_H
+
+
+================ FILE: ./scene/ParagonSceneIntro.cpp ================
+#include "ParagonSceneIntro.hpp"
+
+ParagonSceneIntro::ParagonSceneIntro()
+{
+
+}
+
+
+================ FILE: ./scene/ParagonSceneIntro.hpp ================
+#ifndef PARAGONSCENEINTRO_HPP
+#define PARAGONSCENEINTRO_HPP
+
+#include "ParagonScene.hpp"
+
+class ParagonSceneIntro : public ParagonScene
+{
+public:
+    ParagonSceneIntro();
+};
+
+#endif // PARAGONSCENEINTRO_HPP
+
+
+================ FILE: ./scene/ParagonSceneInWorld.cpp ================
+#include "ParagonSceneInWorld.hpp"
+
+ParagonSceneInWorld::ParagonSceneInWorld()
+{
+
+}
+
+
+================ FILE: ./scene/ParagonSceneInWorld.hpp ================
+#ifndef PARAGONSCENEINWORLD_HPP
+#define PARAGONSCENEINWORLD_HPP
+
+#include "ParagonScene.hpp"
+
+class ParagonSceneInWorld : public ParagonScene
+{
+public:
+    ParagonSceneInWorld();
+};
+
+#endif // PARAGONSCENEINWORLD_HPP
+
+
+================ FILE: ./scene/ParagonSceneLoadingScreen.cpp ================
+#include "ParagonSceneLoadingScreen.hpp"
+
+ParagonSceneLoadingScreen::ParagonSceneLoadingScreen()
+{
+
+}
+
+
+================ FILE: ./scene/ParagonSceneLoadingScreen.hpp ================
+#ifndef PARAGONSCENELOADINGSCREEN_HPP
+#define PARAGONSCENELOADINGSCREEN_HPP
+
+#include "ParagonScene.hpp"
+
+class ParagonSceneLoadingScreen : public ParagonScene
+{
+public:
+    ParagonSceneLoadingScreen();
+};
+
+#endif // PARAGONSCENELOADINGSCREEN_HPP
+
+
+================ FILE: ./scene/ParagonSceneMainMenu.cpp ================
+#include "ParagonSceneMainMenu.hpp"
+
+ParagonSceneMainMenu::ParagonSceneMainMenu()
+{
+
+}
+
+
+================ FILE: ./scene/ParagonSceneMainMenu.hpp ================
+#ifndef PARAGONSCENEMAINMENU_HPP
+#define PARAGONSCENEMAINMENU_HPP
+
+#include "ParagonScene.hpp"
+
+class ParagonSceneMainMenu : public ParagonScene
+{
+public:
+    ParagonSceneMainMenu();
+};
+
+#endif // PARAGONSCENEMAINMENU_HPP
+
+
+================ FILE: ./state/ParagonState.cpp ================
+#include "ParagonState.hpp"
+
+#include <util/Log.hpp>
+
+ParagonState::ParagonState()
+{
+
+}
+
+ParagonState::~ParagonState()
+{
+
+}
+
+void ParagonState::init()
+{
+
+}
+
+void ParagonState::onEvent(const Event& event)
+{
+
+}
+
+
+================ FILE: ./state/ParagonState.hpp ================
+#ifndef PARAGONSTATE_HPP
+#define PARAGONSTATE_HPP
+
+#include <common/EventListener.hpp>
+#include <ParagonApp/scene/ParagonScene.hpp>
+
+#include <memory>
+
+class ParagonState : public EventListener
+{
+public:
+    ParagonState();
+    virtual ~ParagonState();
+    virtual void onEntry() = 0;
+    virtual void onLeave() = 0;
+    virtual const ParagonScene& getScene() const = 0;
+    void init() override;
+    void onEvent(const Event& event) override;
+};
+
+#endif // PARAGONSTATE_HPP
+
+
+================ FILE: ./state/ParagonStateIntro.cpp ================
+#include "ParagonStateIntro.hpp"
+
+ParagonStateIntro::ParagonStateIntro()
+{
+
+}
+
+ParagonStateIntro::~ParagonStateIntro()
+{
+
+}
+
+void ParagonStateIntro::onEntry()
+{
+
+}
+
+void ParagonStateIntro::onLeave()
+{
+
+}
+
+const ParagonScene& ParagonStateIntro::getScene() const
+{
+    return scene;
+}
+
+
+
+================ FILE: ./state/ParagonStateIntro.hpp ================
+#ifndef PARAGONSTATEINTRO_HPP
+#define PARAGONSTATEINTRO_HPP
+
+#include <ParagonApp/scene/ParagonSceneIntro.hpp>
+
+#include "ParagonState.hpp"
+
+class ParagonStateIntro : public ParagonState
+{
+private:
+    ParagonSceneIntro scene;
+public:
+    ParagonStateIntro();
+    ~ParagonStateIntro();
+    void onEntry() override;
+    void onLeave() override;
+    const ParagonScene& getScene() const;
+};
+
+#endif // PARAGONSTATEINTRO_HPP
+
+
+================ FILE: ./state/ParagonStateInWorld.cpp ================
+#include "ParagonStateInWorld.hpp"
+
+ParagonStateInWorld::ParagonStateInWorld()
+{
+
+}
+
+ParagonStateInWorld::~ParagonStateInWorld()
+{
+
+}
+
+void ParagonStateInWorld::onEntry()
+{
+
+}
+
+void ParagonStateInWorld::onLeave()
+{
+
+}
+
+const ParagonScene& ParagonStateInWorld::getScene() const
+{
+    return scene;
+}
+
+
+================ FILE: ./state/ParagonStateInWorld.hpp ================
+#ifndef PARAGONSTATEINWORLD_HPP
+#define PARAGONSTATEINWORLD_HPP
+
+#include <ParagonApp/scene/ParagonSceneInWorld.hpp>
+
+#include "ParagonState.hpp"
+
+class ParagonStateInWorld : public ParagonState
+{
+private:
+    ParagonSceneInWorld scene;
+public:
+    ParagonStateInWorld();
+    ~ParagonStateInWorld();
+    void onEntry();
+    void onLeave();
+    const ParagonScene& getScene() const;
+};
+
+#endif // PARAGONSTATEINWORLD_HPP
+
+
+================ FILE: ./state/ParagonStateLoadingScreen.cpp ================
+#include "ParagonStateLoadingScreen.hpp"
+
+ParagonStateLoadingScreen::ParagonStateLoadingScreen()
+{
+
+}
+
+ParagonStateLoadingScreen::~ParagonStateLoadingScreen()
+{
+
+}
+
+void ParagonStateLoadingScreen::onEntry()
+{
+
+}
+
+void ParagonStateLoadingScreen::onLeave()
+{
+
+}
+
+const ParagonScene& ParagonStateLoadingScreen::getScene() const
+{
+    return scene;
+}
+
+
+
+================ FILE: ./state/ParagonStateLoadingScreen.hpp ================
+#ifndef PARAGONSTATELOADINGSCREEN_HPP
+#define PARAGONSTATELOADINGSCREEN_HPP
+
+#include <ParagonApp/scene/ParagonSceneLoadingScreen.hpp>
+
+#include "ParagonState.hpp"
+
+class ParagonStateLoadingScreen : public ParagonState
+{
+private:
+    ParagonSceneLoadingScreen scene;
+public:
+    ParagonStateLoadingScreen();
+    ~ParagonStateLoadingScreen();
+    void onEntry() override;
+    void onLeave() override;
+    const ParagonScene& getScene() const;
+};
+
+#endif // PARAGONSTATELOADINGSCREEN_HPP
+
+
+================ FILE: ./state/ParagonStateMainMenu.cpp ================
+#include "ParagonStateMainMenu.hpp"
+
+ParagonStateMainMenu::ParagonStateMainMenu()
+{
+
+}
+
+ParagonStateMainMenu::~ParagonStateMainMenu()
+{
+
+}
+
+void ParagonStateMainMenu::onEntry()
+{
+
+}
+
+void ParagonStateMainMenu::onLeave()
+{
+
+}
+
+const ParagonScene& ParagonStateMainMenu::getScene() const
+{
+    return scene;
+}
+
+
+
+================ FILE: ./state/ParagonStateMainMenu.hpp ================
+#ifndef PARAGONSTATEMAINMENU_HPP
+#define PARAGONSTATEMAINMENU_HPP
+
+#include <ParagonApp/scene/ParagonSceneMainMenu.hpp>
+
+#include "ParagonState.hpp"
+
+class ParagonStateMainMenu : public ParagonState
+{
+private:
+    ParagonSceneMainMenu scene;
+public:
+    ParagonStateMainMenu();
+    ~ParagonStateMainMenu();
+    void onEntry();
+    void onLeave();
+    const ParagonScene& getScene() const;
+};
+
+#endif // PARAGONSTATEMAINMENU_HPP
+
+
+================ FILE: ./state/ParagonStateManager.cpp ================
+#include "ParagonStateManager.hpp"
+
+#include <util/Log.hpp>
+
+#include "ParagonStateIntro.hpp"
+#include "ParagonStateMainMenu.hpp"
+#include "ParagonStateLoadingScreen.hpp"
+#include "ParagonStateInWorld.hpp"
+
+ParagonStateManager::ParagonStateManager()
+{
+    currentState = std::make_unique<ParagonStateIntro>();
+}
+
+const std::type_info& ParagonStateManager::getCurrentStateTypeID() const
+{
+    if (currentState != nullptr)
+    {
+        const ParagonState& state = *currentState;
+        return typeid(state);
+    }
+    else
+    {
+        log_warning("Current state in ParagonApplication has not been set!");
+        return typeid(ParagonState);
+    }
+}
+
+const ParagonScene& ParagonStateManager::getCurrentScene() const
+{
+    return currentState->getScene();
+}
+
+
+================ FILE: ./state/ParagonStateManager.hpp ================
+#ifndef PARAGONSTATEMANAGER_HPP
+#define PARAGONSTATEMANAGER_HPP
+
+#include <memory>
+#include <ParagonApp/scene/ParagonScene.hpp>
+
+#include "ParagonState.hpp"
+
+class ParagonStateManager
+{
+private:
+    std::unique_ptr<ParagonState> currentState;
+public:
+    ParagonStateManager();
+    ~ParagonStateManager() = default;
+    const std::type_info& getCurrentStateTypeID() const;
+    const ParagonScene& getCurrentScene() const;
+};
+
+#endif // PARAGONSTATEMANAGER_HPP
+
+

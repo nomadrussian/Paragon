@@ -19,3 +19,9 @@ void ParagonStateIntro::onLeave()
 {
 
 }
+
+const ParagonScene& ParagonStateIntro::getScene() const
+{
+    return scene;
+}
+

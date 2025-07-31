@@ -25,3 +25,8 @@ const std::type_info& ParagonStateManager::getCurrentStateTypeID() const
         return typeid(ParagonState);
     }
 }
+
+const ParagonScene& ParagonStateManager::getCurrentScene() const
+{
+    return currentState->getScene();
+}

@@ -24,7 +24,7 @@ void ParagonConfig::loadConfig(std::string configFilePath)
         return;
     }
 
-    if (configData.contains("RESOLUTION_WIDTH")) TICKRATE = configData["TICKRATE"].get<float>();
+    if (configData.contains("TICKRATE")) TICKRATE = configData["TICKRATE"].get<float>();
 }
 
 void ParagonConfig::resetToDefault()

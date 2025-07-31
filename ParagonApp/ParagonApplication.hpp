@@ -12,13 +12,13 @@
 class ParagonApplication : public Application
 {
 private:
-    ParagonStateManager stateManager;
+    std::unique_ptr<ParagonStateManager> stateManager;
 public:
     ParagonApplication();
     void init() override;
     void update() override;
     ApplicationType getApplicationType() const override;
-    const ApplicationScene& getCurrentScene() const override;
+    const ApplicationScene& getCurrentScene() const;
 };
 
 #endif // PARAGONAPPLICATION_HPP

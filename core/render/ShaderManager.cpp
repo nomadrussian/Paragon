@@ -15,6 +15,7 @@ void ShaderManager::initShaders()
     log_debug("Loading shaders...");
     ShaderProgram_DEFAULT = makeShaderProgram("shader.vert", "shader.frag");
     ShaderProgram_TEXT = makeShaderProgram("text.vert", "text.frag");
+    log_debug("Initialization of the shaders has been completed");
 }
 
 GLuint ShaderManager::makeShaderProgram(const std::string& vertexShaderSourcePath, const std::string& fragmentShaderSourcePath)
@@ -50,8 +51,6 @@ GLuint ShaderManager::makeShaderProgram(const std::string& vertexShaderSourcePat
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-
-    log_debug("Shaders initialization has been completed");
 
     return shaderProgram;
 }

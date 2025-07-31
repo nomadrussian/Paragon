@@ -100,14 +100,18 @@ void Core::run()
 
         mainWindow->refresh();
 
-        //log("FPS: " + std::to_string(1.0 / deltaTime));
         lastFrameTime = currentFrameTime;
     }
 
     log_debug("Shutting down Core...");
 }
 
-float Core::getDeltaTime()
+float Core::getDeltaTime() const
 {
     return deltaTime;
+}
+
+const Application& Core::getApplicationInstance() const
+{
+    return *applicationInstance;
 }

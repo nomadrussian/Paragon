@@ -10,6 +10,7 @@
 #include "input/InputHandler.hpp"
 #include "input/KeyboardListener.hpp"
 #include "input/MouseListener.hpp"
+#include "render/RenderHandler.hpp"
 
 
 class Core : public Singleton<Core>
@@ -28,7 +29,8 @@ private:
 public:
     void setApplicationInstance(std::unique_ptr<Application>);
     void run();
-    float getDeltaTime();
+    float getDeltaTime() const;
+    const Application& getApplicationInstance() const;
 
 protected:
     Core();

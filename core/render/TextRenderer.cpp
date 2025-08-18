@@ -1,6 +1,7 @@
 #include "TextRenderer.hpp"
 
 #include <util/Log.hpp>
+
 #include <iostream>
 
 #include <glm/glm.hpp>
@@ -8,25 +9,16 @@
 
 #include "ShaderManager.hpp"
 
-#include <util/Log.hpp>
-
 TextRenderer::TextRenderer()
 {
 }
 
 void TextRenderer::initFonts()
 {
-    fontConsole = *AssetManager::getInstance().getAsset<Font>(fontDir + fontConsolePath);
-    if (!fontConsole.loadAtlasMetadata(fontDir + fontConsoleMetadataPath))
-    {
-        log_error(std::string("Failed to load console font metadata from ") + fontDir + fontConsoleMetadataPath);
-    }
-
-    fontUI = *AssetManager::getInstance().getAsset<Font>(fontDir + fontUIPath);
-    if (!fontUI.loadAtlasMetadata(fontDir + fontUIMetadataPath))
-    {
-        log_error(std::string("Failed to load console font metadata from ") + fontDir + fontUIMetadataPath);
-    }
+    fontConsole = AssetManager::getInstance().getAsset<Font>(fontDir + fontConsoleMetadataPath);
+    fontConsole->attachTexture(AssetManager::getInstance().getAsset<Texture>(fontDir + fontConsoleTexturePath));
+    fontUI = AssetManager::getInstance().getAsset<Font>(fontDir + fontUIMetadataPath);
+    fontUI->attachTexture(AssetManager::getInstance().getAsset<Texture>(fontDir + fontConsoleTexturePath));
 }
 
 void TextRenderer::renderString(unsigned maxWidth, const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font)
@@ -50,7 +42,7 @@ void TextRenderer::renderString(unsigned maxWidth, const std::string& string, in
             y -= fontPrintedSize;
         }
 
-        renderGlyph(g, x, y, fontPrintedSize, font);
+        renderGlyph(g, x, y, fontPrintedSize);
         x += g.advance * fontPrintedSize;
     }
 }
@@ -76,12 +68,12 @@ void TextRenderer::renderString(unsigned maxWidth, const std::u32string& unicode
             y -= fontPrintedSize;
         }
 
-        renderGlyph(g, x, y, fontPrintedSize, font);
+        renderGlyph(g, x, y, fontPrintedSize);
         x += g.advance * fontPrintedSize;
     }
 }
 
-void TextRenderer::renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale, const Font& font)
+void TextRenderer::renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale)
 {
     float _x = x + g.xMin * scale;
     float _y = y + g.yMin * scale;
@@ -90,12 +82,12 @@ void TextRenderer::renderGlyph(const Glyph& g, const int& x, const int& y, const
 
     float vertices[6][4]
     {
-        { _x     , _y     , g.u0, g.v0 },
-        { _x + gw, _y     , g.u1, g.v0 },
-        { _x     , _y + gh, g.u0, g.v1 },
-        { _x     , _y + gh, g.u0, g.v1 },
-        { _x + gw, _y + gh, g.u1, g.v1 },
-        { _x + gw, _y     , g.u1, g.v0 }
+        { _x     , _y     , g.uv[0], g.uv[1] },
+        { _x + gw, _y     , g.uv[2], g.uv[1] },
+        { _x     , _y + gh, g.uv[0], g.uv[3] },
+        { _x     , _y + gh, g.uv[0], g.uv[3] },
+        { _x + gw, _y + gh, g.uv[2], g.uv[3] },
+        { _x + gw, _y     , g.uv[2], g.uv[1] }
     };
 
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
@@ -104,10 +96,10 @@ void TextRenderer::renderGlyph(const Glyph& g, const int& x, const int& y, const
 
 const Font& TextRenderer::getConsoleFont() const
 {
-    return fontConsole;
+    return *fontConsole;
 }
 
 const Font& TextRenderer::getUIFont() const
 {
-    return fontUI;
+    return *fontUI;
 }

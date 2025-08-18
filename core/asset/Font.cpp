@@ -1,63 +1,60 @@
 #include "Font.hpp"
 
 #include <external/include/nlohmann_json.hpp>
-#define STB_IMAGE_IMPLEMENTATION
-#include <external/include/stb_image.h>
 #include <util/Log.hpp>
 
 #include <fstream>
 
-Font::Font()
+Font::Font(const std::string& fontMetadataPath) : Asset(fontMetadataPath)
 {
 }
 
 Font::~Font()
 {
-    glDeleteTextures(1, &atlasTexture);
-    glDeleteVertexArrays(1, &atlasVAO);
-    glDeleteBuffers(1, &atlasVBO);
-    atlasTexture = 0;
-    atlasVAO = 0;
-    atlasVBO = 0;
     atlas.clear();
 }
 
-bool Font::loadFromData(const std::vector<uint8_t>& rawData)
+void Font::attachTexture(std::shared_ptr<Texture> fontTexture)
 {
-    int atlasWidth, atlasHeight, atlasChannels;
-    stbi_uc* data = stbi_load_from_memory(rawData.data(), rawData.size(), &atlasWidth, &atlasHeight, &atlasChannels, 3);
-    if (!data)
-    {
-        log_error("Failed to parse font atlas texture");
-        return false;
-    }
-
-    glGenBuffers(1, &atlasVBO);
-    glGenVertexArrays(1, &atlasVAO);
-    glBindVertexArray(atlasVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, atlasVBO);
-    glBufferData(GL_ARRAY_BUFFER, 6 * 4 * sizeof(float), NULL, GL_DYNAMIC_DRAW); // 6 vertices for a squad
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(0));
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-    glGenTextures(1, &atlasTexture);
-    glBindTexture(GL_TEXTURE_2D, atlasTexture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, atlasWidth, atlasHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-    stbi_image_free(data);
-
-    return true;
+    texture = fontTexture;
 }
 
-bool Font::loadAtlasMetadata(const std::string& filePath)
+AssetType Font::getType() const
+{
+    return AssetType::Font;
+}
+
+const Texture& Font::getTexture() const
+{
+    return *texture;
+}
+
+const Glyph& Font::getGlyph(char c) const
+{
+    return getGlyph(static_cast<char32_t>(c));
+}
+
+const Glyph& Font::getGlyph(char32_t c) const
+{
+    if (atlas.find(c) == atlas.end())
+    {
+        return atlas.at(U'?');
+    }
+
+    return atlas.at(c);
+}
+
+int Font::getDistanceRange() const
+{
+    return distanceRange;
+}
+
+int Font::getSize() const
+{
+    return size;
+}
+
+bool Font::loadData()
 {
     std::ifstream rawMetadata(filePath);
     if (!rawMetadata)
@@ -119,9 +116,10 @@ bool Font::loadAtlasMetadata(const std::string& filePath)
             }
         }
         */
-        if(entry.contains("advance")) atlas[c].advance = entry["advance"].get<float>();
 
-        if(entry.contains("planeBounds"))
+        if (entry.contains("advance")) atlas[c].advance = entry["advance"].get<float>();
+
+        if (entry.contains("planeBounds"))
         {
             auto entryPlaneBounds = entry["planeBounds"];
             if(entryPlaneBounds.contains("left")) atlas[c].xMin = entryPlaneBounds["left"].get<float>();
@@ -130,60 +128,16 @@ bool Font::loadAtlasMetadata(const std::string& filePath)
             if(entryPlaneBounds.contains("top")) atlas[c].yMax = entryPlaneBounds["top"].get<float>();
         }
 
-        if(entry.contains("atlasBounds"))
+        if (entry.contains("atlasBounds"))
         {
             auto entryAtlasBounds = entry["atlasBounds"];
-            if(entryAtlasBounds.contains("left")) atlas[c].u0 = entryAtlasBounds["left"].get<float>() / atlasWidth;
-            if(entryAtlasBounds.contains("bottom")) atlas[c].v0 = entryAtlasBounds["bottom"].get<float>() / atlasHeight;
-            if(entryAtlasBounds.contains("right")) atlas[c].u1 = entryAtlasBounds["right"].get<float>() / atlasWidth;
-            if(entryAtlasBounds.contains("top")) atlas[c].v1 = entryAtlasBounds["top"].get<float>() / atlasHeight;
+            if (entryAtlasBounds.contains("left")) atlas[c].uv[0] = entryAtlasBounds["left"].get<float>() / atlasWidth;
+            if (entryAtlasBounds.contains("bottom")) atlas[c].uv[1] = entryAtlasBounds["bottom"].get<float>() / atlasHeight;
+            if (entryAtlasBounds.contains("right")) atlas[c].uv[2] = entryAtlasBounds["right"].get<float>() / atlasWidth;
+            if (entryAtlasBounds.contains("top")) atlas[c].uv[3] = entryAtlasBounds["top"].get<float>() / atlasHeight;
         }
     }
 
     return true;
 }
 
-AssetType Font::getType() const
-{
-    return AssetType::Font;
-}
-
-const Glyph& Font::getGlyph(char c) const
-{
-    return getGlyph(static_cast<char32_t>(c));
-}
-
-const Glyph& Font::getGlyph(char32_t c) const
-{
-    if (atlas.find(c) == atlas.end())
-    {
-        return atlas.at(U'?');
-    }
-
-    return atlas.at(c);
-}
-
-GLuint Font::getAtlasTexture() const
-{
-    return atlasTexture;
-}
-
-GLuint Font::getVBO() const
-{
-    return atlasVBO;
-}
-
-GLuint Font::getVAO() const
-{
-    return atlasVAO;
-}
-
-int Font::getDistanceRange() const
-{
-    return distanceRange;
-}
-
-int Font::getSize() const
-{
-    return size;
-}

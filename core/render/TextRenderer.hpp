@@ -16,13 +16,13 @@ private:
 
     std::string fontDir = "../data/font/";
 
-    Font fontConsole;
-    std::string fontConsolePath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.png";
-    std::string fontConsoleMetadataPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.json";
+    std::shared_ptr<Font> fontConsole;
+    std::string fontConsoleTexturePath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.png";
+    std::string fontConsoleMetadataPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.font";
 
-    Font fontUI;
-    std::string fontUIPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.png";
-    std::string fontUIMetadataPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.json";
+    std::shared_ptr<Font> fontUI;
+    std::string fontUITexturePath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.png";
+    std::string fontUIMetadataPath = "JetBrainsMono/JetBrainsMono-VariableFont_wght.font";
 
 public:
     TextRenderer();
@@ -34,7 +34,7 @@ public:
     const Font& getUIFont() const;
 
 private:
-    void renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale, const Font& font);
+    void renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale);
 };
 
 #endif // TEXTRENDERER_HPP

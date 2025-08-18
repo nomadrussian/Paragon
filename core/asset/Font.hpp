@@ -1,17 +1,20 @@
 #ifndef FONT_HPP
 #define FONT_HPP
 
+#include <core/asset/Texture.hpp>
+
 #include <unordered_map>
 #include <vector>
+#include <memory>
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 #include "Asset.hpp"
 
 struct Glyph
 {
-    float u0 = 0, v0 = 0; // Normalized 1st coordinates in the atlas
-    float u1 = 0, v1 = 0; // Normalized 2nd coordinates in the atlas
+    glm::vec4 uv = { 0.0f, 0.0f, 0.0f, 0.0f }; // Normalized coordinates in the atlas
     float xMax = 0, xMin = 0;
     float yMax = 0, yMin = 0;
     float advance = 0;
@@ -23,27 +26,22 @@ class Font : public Asset
 private:
     Glyph glyph;
     std::unordered_map<char32_t, Glyph> atlas;
-
-    GLuint atlasTexture = 0;
-    GLuint atlasVBO = 0;
-    GLuint atlasVAO = 0;
     int distanceRange;
     int size;
+    std::shared_ptr<Texture> texture;
 
 public:
-    Font();
+    Font(const std::string& fontMetadataPath);
     ~Font() override;
-    bool loadAtlasMetadata(const std::string& filePath);
+    void attachTexture(std::shared_ptr<Texture> fontTexture);
+    const Texture& getTexture() const;
     const Glyph& getGlyph(char c) const;
     const Glyph& getGlyph(char32_t c) const;
-    GLuint getAtlasTexture() const;
-    GLuint getVBO() const;
-    GLuint getVAO() const;
     int getDistanceRange() const;
     int getSize() const;
 
-protected:
-    bool loadFromData(const std::vector<uint8_t>& rawData) override;
+private:
+    bool loadData() override;
     AssetType getType() const override;
 };
 

@@ -17,13 +17,15 @@ class Asset
 {
     friend class AssetManager;
 protected:
-    std::string assetPath;
+    std::string filePath;
+
 public:
-    Asset() = default;
+    Asset(const std::string& filePath) : filePath(filePath) {}
     virtual ~Asset() = default;
+
+private:
+    virtual bool loadData() = 0;
     virtual AssetType getType() const = 0;
-protected:
-    virtual bool loadFromData(const std::vector<uint8_t>& rawData) = 0;
 };
 
 #endif // ASSET_HPP

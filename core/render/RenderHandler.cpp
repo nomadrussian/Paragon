@@ -80,10 +80,10 @@ void RenderHandler::setUpOpenGLForText(const Font& font)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glBindVertexArray(font.getVAO());
-    glBindBuffer(GL_ARRAY_BUFFER, font.getVBO());
+    glBindVertexArray(font.getTexture().getVAO());
+    glBindBuffer(GL_ARRAY_BUFFER, font.getTexture().getVBO());
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, font.getAtlasTexture());
+    glBindTexture(GL_TEXTURE_2D, font.getTexture().getTextureID());
 
     glUseProgram(textShaderProgram);
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));

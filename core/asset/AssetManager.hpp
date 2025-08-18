@@ -2,6 +2,7 @@
 #define ASSETMANAGER_HPP
 
 #include <common/Singleton.hpp>
+#include <external/include/nlohmann_json.hpp>
 #include <util/Log.hpp>
 
 #include <cassert>
@@ -34,21 +35,14 @@ public:
             return true;
         }
 
-        std::shared_ptr<AssetT> new_asset = std::make_shared<AssetT>();
+        std::shared_ptr<AssetT> new_asset = std::make_shared<AssetT>(assetPath);
         if (new_asset == nullptr)
         {
             log_error(std::string("Unable to create new_asset while processing ") + assetPath);
             return false;
         }
 
-        std::vector<uint8_t> rawDataBuffer = loadRawDataFromDisk(assetPath);
-        if (rawDataBuffer.empty())
-        {
-            log_error(std::string("Unable to create new_asset while loading data from ") + assetPath);
-            return false;
-        }
-
-        if (!static_cast<Asset*>(new_asset.get())->loadFromData(rawDataBuffer))
+        if (!static_cast<Asset*>(new_asset.get())->loadData())
         {
             log_error(std::string("AssetManager: asset data loading failure while processing ") + assetPath);
             return false;
@@ -87,13 +81,15 @@ public:
         return std::dynamic_pointer_cast<AssetT>(assetCache[assetPath]);
     }
 
+    std::vector<uint8_t> loadRawDataFromDisk(const std::string& filePath); // Loads raw binary data
+    //nlohmann::json loadJSONData
+
 protected:
     AssetManager() = default;
     ~AssetManager() = default;
 
 private:
     AssetType detectAssetType(const std::string& filePath); // Detects asset type by extension
-    std::vector<uint8_t> loadRawDataFromDisk(const std::string& filePath); // Loads raw binary data
 
     template<typename AssetT>
     bool matchesType(AssetType type)

@@ -2,6 +2,7 @@
 
 #include <util/Debugger.hpp>
 #include <util/Log.hpp>
+#include <util/lua/LuaManager.hpp>
 
 #include <cassert>
 
@@ -41,6 +42,9 @@ Core::Core()
     mouseListener = std::make_shared<MouseListener>();
     keyboardListener->init();
     mouseListener->init();
+
+    log_debug("Initializing Lua...");
+    LuaManager::init();
 
     log_debug("Core initialization has been completed");
 }

@@ -7,10 +7,11 @@ class Shader : public Asset
 {
     friend class AssetManager;
 public:
-    Shader();
+    Shader(const std::string& filePath);
     ~Shader();
+
 private:
-    bool loadFromData(const std::vector<uint8_t>& rawData) override;
+    bool loadData() override;
     AssetType getType() const override;
 };
 

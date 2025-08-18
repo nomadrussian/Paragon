@@ -1,6 +1,6 @@
 #include "Shader.hpp"
 
-Shader::Shader()
+Shader::Shader(const std::string& filePath) : Asset(filePath)
 {
 
 }
@@ -10,7 +10,7 @@ Shader::~Shader()
 
 }
 
-bool Shader::loadFromData(const std::vector<uint8_t>& rawData)
+bool Shader::loadData()
 {
 
 }

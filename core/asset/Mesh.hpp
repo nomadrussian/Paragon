@@ -7,10 +7,11 @@ class Mesh : public Asset
 {
     friend class AssetManager;
 public:
-    Mesh();
+    Mesh(const std::string& filePath);
     ~Mesh();
+
 private:
-    bool loadFromData(const std::vector<uint8_t>& rawData) override;
+    bool loadData() override;
     AssetType getType() const override;
 };
 

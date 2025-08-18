@@ -1,6 +1,6 @@
 #include "Mesh.hpp"
 
-Mesh::Mesh()
+Mesh::Mesh(const std::string& filePath) : Asset(filePath)
 {
 
 }
@@ -10,7 +10,7 @@ Mesh::~Mesh()
 
 }
 
-bool Mesh::loadFromData(const std::vector<uint8_t>& rawData)
+bool Mesh::loadData()
 {
 
 }

@@ -94,12 +94,12 @@ void TextRenderer::renderGlyph(const Glyph& g, const int& x, const int& y, const
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-const Font& TextRenderer::getConsoleFont() const
+std::shared_ptr<Font> TextRenderer::getConsoleFont() const
 {
-    return *fontConsole;
+    return fontConsole;
 }
 
-const Font& TextRenderer::getUIFont() const
+std::shared_ptr<Font> TextRenderer::getUIFont() const
 {
-    return *fontUI;
+    return fontUI;
 }

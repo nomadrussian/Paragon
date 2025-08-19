@@ -11,4 +11,5 @@ ParagonScene::ParagonScene()
 
 ParagonScene::~ParagonScene()
 {
+    log_debug("Destroying ParagonScene");
 }

@@ -30,8 +30,8 @@ public:
     void initFonts();
     void renderString(unsigned maxWidth, const std::string& string, int x, int y, unsigned fontPrintedSize, const Font& font);
     void renderString(unsigned maxWidth, const std::u32string& unicodeString, int x, int y, unsigned fontPrintedSize, const Font& font);
-    const Font& getConsoleFont() const;
-    const Font& getUIFont() const;
+    std::shared_ptr<Font> getConsoleFont() const;
+    std::shared_ptr<Font> getUIFont() const;
 
 private:
     void renderGlyph(const Glyph& g, const int& x, const int& y, const unsigned& scale);

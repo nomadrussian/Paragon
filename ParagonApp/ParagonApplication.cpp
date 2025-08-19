@@ -33,7 +33,6 @@ void ParagonApplication::update()
     {
         ParagonEventManager::getInstance().flushEvents();
     }
-    // to move: RenderHandler::getInstance().renderText(std::string("State: "), 500, 500, 24, RenderHandler::getInstance().getTextRenderer().getUIFont());
 }
 
 ApplicationType ParagonApplication::getApplicationType() const

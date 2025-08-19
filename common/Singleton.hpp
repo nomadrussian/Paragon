@@ -40,7 +40,7 @@ public:
 
     static T& getInstance()
     {
-        assert(instance != nullptr && "Singleton has noot been instantiated");
+        assert(instance != nullptr && "Singleton has not been instantiated");
         return *instance;
     }
 

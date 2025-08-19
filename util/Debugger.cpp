@@ -8,10 +8,17 @@
 template<>
 Debugger* Singleton<Debugger>::instance = nullptr;
 
+/* TODO:
+ * display ParagonState
+ * display UIStack
+ * display RAM usage
+ * display CPU usage
+ * display VRAM usage
+ */
 void Debugger::renderDebugScreen()
 {
     RenderHandler& renderer = RenderHandler::getInstance();
-    const Font& font = renderer.getTextRenderer().getConsoleFont();
+    const Font& font = *renderer.getTextRenderer().getConsoleFont();
     int screenW = GraphicsConfig::RESOLUTION.WIDTH;
     int screenH = GraphicsConfig::RESOLUTION.HEIGHT;
     int scale = 24 * screenH / 900.0f;

@@ -10,7 +10,7 @@ LuaScript::~LuaScript()
     LuaManager::getInstance().unloadScript(scriptFunctionTableID);
 }
 
-void LuaScript::callFunction(const std::string& functionName, bool callAsMethod, const std::vector<LuaParameter>& args)
+void LuaScript::callScript(const std::string& runFunctionName, bool callAsMethod, const std::vector<LuaParameter>& args)
 {
-    LuaManager::getInstance().callFunction(scriptFunctionTableID, functionName, callAsMethod, args);
+    LuaManager::getInstance().callScript(scriptFunctionTableID, runFunctionName, callAsMethod, args);
 }

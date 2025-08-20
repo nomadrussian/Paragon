@@ -40,6 +40,7 @@ GLuint ShaderManager::makeShaderProgram(const std::string& vertexShaderSourcePat
     int success;
     char infoLog[512];
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+
     if (!success)
     {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);

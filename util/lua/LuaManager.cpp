@@ -29,7 +29,9 @@ int LuaManager::loadScript(const std::string& scriptPath, const std::string& scr
 {
     int refID = -1;
 
-    if (luaL_dofile(L, scriptPath.c_str()) != LUA_OK)
+    std::string fullScriptPath = scriptDir + scriptPath;
+
+    if (luaL_dofile(L, fullScriptPath.c_str()) != LUA_OK)
     {
         log_error(std::string("Failed to load script from ") + scriptPath);
         log_error(lua_tostring(L, -1));
@@ -51,11 +53,11 @@ int LuaManager::loadScript(const std::string& scriptPath, const std::string& scr
     return refID;
 }
 
-void LuaManager::callFunction(int scriptFunctionTableID, const std::string& functionName, bool callAsMethod, const std::vector<LuaParameter>& args)
+void LuaManager::callScript(int scriptFunctionTableID, const std::string& runFunctionName, bool callAsMethod, const std::vector<LuaParameter>& args)
 {
     if (scriptFunctionTableID == LUA_NOREF)
     {
-        log_error(std::string("Invalid scriptFunctionTableID when calling ") + functionName);
+        log_error(std::string("Invalid scriptFunctionTableID when calling ") + runFunctionName);
         return;
     }
 
@@ -63,23 +65,23 @@ void LuaManager::callFunction(int scriptFunctionTableID, const std::string& func
 
     if (lua_isnil(L, -1))
     {
-        log_error(std::string("Nil table reference when calling ") + functionName);
+        log_error(std::string("Nil table reference when calling ") + runFunctionName);
         lua_pop(L, 1);
         return;
     }
 
     if (!lua_istable(L, -1))
     {
-        log_error(std::string("Got not a table when calling ") + functionName);
+        log_error(std::string("Got not a table when calling ") + runFunctionName);
         lua_pop(L, 1);
         return;
     }
 
-    lua_getfield(L, -1, functionName.c_str());
+    lua_getfield(L, -1, runFunctionName.c_str());
 
     if (!lua_isfunction(L, -1))
     {
-        log_error(std::string("Unable to find function ") + functionName);
+        log_error(std::string("Unable to find function ") + runFunctionName);
         lua_pop(L, 2); // table loaded successfully so pop 2 elements
         return;
     }
@@ -105,7 +107,7 @@ void LuaManager::callFunction(int scriptFunctionTableID, const std::string& func
 
     if (lua_pcall(L, (callAsMethod ? 1 : 0) + argsLength, 0, 0) != LUA_OK)
     {
-        log_error(std::string("Unable to call function ") + functionName);
+        log_error(std::string("Unable to call function ") + runFunctionName);
         log_error(lua_tostring(L, -1));
         lua_pop(L, 1);
     }

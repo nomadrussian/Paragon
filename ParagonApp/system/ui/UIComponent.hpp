@@ -1,5 +1,5 @@
-#ifndef UICOMPONENTS_HPP
-#define UICOMPONENTS_HPP
+#ifndef UICOMPONENT_HPP
+#define UICOMPONENT_HPP
 
 #include <common/Component.hpp>
 #include <core/render/RenderHandler.hpp>
@@ -11,30 +11,30 @@
 
 #include <glm/glm.hpp>
 
-enum class ButtonType
-{
-    Click,
-    Push,
-    Unknown
-};
-
 /*
  * We do not call LuaScripts every frame, and it actually makes you
  * free from being too concerned about cache friendliness (as a bonus).
  * Also AoS (array of structs) is preferred when all the field of a component
  * are likely to be accessed at the same time.
  */
-struct UIButtonComponent : Component
+
+struct UIClickComponent : Component
 {
-    bool isAvailableToUse = false;
-    ButtonType type = ButtonType::Unknown;
+    bool availableToUse = false;
+    std::shared_ptr<LuaScript> script = nullptr;
+    std::vector<LuaParameter> scriptParameterList;
+};
+
+struct UIPushComponent : Component
+{
+    bool availableToUse = false;
     std::shared_ptr<LuaScript> script = nullptr;
     std::vector<LuaParameter> scriptParameterList;
 };
 
 struct UISliderComponent : Component
 {
-    bool isAvailableToUse = false;
+    bool availableToUse = false;
     float min = 0.0f;
     float max = 1.0f;
     float current = (max - min) * 0.3f;
@@ -62,7 +62,12 @@ struct UITextComponent : Component
     std::u32string text;
     std::shared_ptr<Font> font = nullptr;
     float fontSize = 14.0f;
-    glm::vec2 positionOffset = { 0.0f, 0.0f };
+    glm::vec2 positionOffset = { 0.0f, 0.0f }; // in pixels
 };
 
-#endif // UICOMPONENTS_HPP
+struct UIRectangleComponent: Component
+{
+    glm::vec2 size = { 64.0f, 32.0f }; // in pixels
+};
+
+#endif // UICOMPONENT_HPP

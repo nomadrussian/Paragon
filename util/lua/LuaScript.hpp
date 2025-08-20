@@ -14,7 +14,7 @@ private:
 public:
     LuaScript(const std::string& scriptPath, const std::string& scriptTableName);
     ~LuaScript();
-    void callFunction(const std::string& functionName, bool callAsMethod, const std::vector<LuaParameter>& args);
+    void callScript(const std::string& runFunctionName, bool callAsMethod, const std::vector<LuaParameter>& args);
 };
 
 #endif // LUASCRIPT_HPP

@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <string>
+#include <type_traits>
 #include <unordered_map>
 #include <vector>
 
@@ -20,6 +21,9 @@ protected:
     virtual ~Component() = default;
 };
 
+template<typename T>
+concept ComponentDerivedType = std::is_base_of_v<Component, T>;
+
 template<EntityIDType EntityIDT>
 class ComponentStorage
 {
@@ -27,12 +31,10 @@ public:
     virtual void addEntity(EntityIDT entity) = 0;
     virtual void removeEntity(EntityIDT entity) = 0;
     virtual bool hasEntity(EntityIDT entity) const = 0;
+    virtual void* getComponentRaw(EntityIDT entity) const = 0;
     virtual size_t getNumberOfEntities() const = 0;
     virtual void removeAllEntities() = 0;
 };
-
-template<typename T>
-concept ComponentDerivedType = std::is_base_of_v<Component, T>;
 
 /*
  * We use std::unordered_map for components that are not processed frequently,
@@ -49,7 +51,7 @@ private:
     std::unordered_map<EntityIDT, ComponentT> componentMap;
 
 public:
-    void addEntity(EntityIDT entity)
+    void addEntity(EntityIDT entity) override
     {
         if (hasEntity(entity))
         {
@@ -60,10 +62,10 @@ public:
             return;
         }
 
-        componentMap[entity] = ComponentT();
+        componentMap.try_emplace(entity);
     }
 
-    void removeEntity(EntityIDT entity)
+    void removeEntity(EntityIDT entity) override
     {
         if (!hasEntity(entity))
         {
@@ -77,17 +79,36 @@ public:
         componentMap.erase(entity);
     }
 
-    bool hasEntity(EntityIDT entity) const
+    bool hasEntity(EntityIDT entity) const override
     {
-        return componentMap.find(entity) != componentMap.end();
+        return componentMap.contains(entity);
     }
 
-    size_t getNumberOfEntities() const
+    ComponentT* getComponent(EntityIDT entity) const
+    {
+        if (!hasEntity(entity))
+        {
+            log_warning(
+                std::string("Attempt to get component ") + typeid(ComponentT).name() + std::string(" from entity ") +
+                typeid(EntityIDT).name() + std::string(" #") + std::to_string(entity) + std::string(" which doesn't exist.")
+            );
+            return nullptr;
+        }
+
+        return &componentMap.at(entity);
+    }
+
+    void* getComponentRaw(EntityIDT entity) const override
+    {
+        return static_cast<void*>(getComponent(entity));
+    }
+
+    size_t getNumberOfEntities() const override
     {
         return componentMap.size();
     }
 
-    void removeAllEntities()
+    void removeAllEntities() override
     {
         componentMap.clear();
     }
@@ -107,7 +128,7 @@ private:
     std::unordered_map<EntityIDT, size_t> entityToIndexMap;
 
 public:
-    void addEntity(EntityIDT entity)
+    void addEntity(EntityIDT entity) override
     {
         if (hasEntity(entity))
         {
@@ -119,11 +140,11 @@ public:
         }
 
         entityList.push_back(entity);
-        componentList.push_back(ComponentT());
+        componentList.emplace_back();
         entityToIndexMap[entity] = entityList.size() - 1;
     }
 
-    void removeEntity(EntityIDT entity)
+    void removeEntity(EntityIDT entity) override
     {
         size_t index = getEntityIndex(entity);
 
@@ -150,9 +171,28 @@ public:
         entityToIndexMap.erase(entity);
     }
 
-    bool hasEntity(EntityIDT entity) const
+    bool hasEntity(EntityIDT entity) const override
     {
-        return entityToIndexMap.find(entity) != entityToIndexMap.end();
+        return entityToIndexMap.contains(entity);
+    }
+
+    ComponentT* getComponent(EntityIDT entity) const
+    {
+        if (!hasEntity(entity))
+        {
+            log_warning(
+                std::string("Attempt to get component ") + typeid(ComponentT).name() + std::string(" from entity ") +
+                typeid(EntityIDT).name() + std::string(" #") + std::to_string(entity) + std::string(" which doesn't exist.")
+            );
+            return nullptr;
+        }
+
+        return &componentList.at(getEntityIndex(entity));
+    }
+
+    void* getComponentRaw(EntityIDT entity) const override
+    {
+        return static_cast<void*>(getComponent(entity));
     }
 
     size_t getEntityIndex(EntityIDT entity) const
@@ -161,12 +201,12 @@ public:
         return iterator != entityToIndexMap.end() ? iterator->second : static_cast<size_t>(ENTITY_NOTFOUND<EntityIDT>);
     }
 
-    size_t getNumberOfEntities() const
+    size_t getNumberOfEntities() const override
     {
         return componentList.size();
     }
 
-    void removeAllEntities()
+    void removeAllEntities() override
     {
         componentList.clear();
         entityList.clear();

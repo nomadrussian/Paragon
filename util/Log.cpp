@@ -20,7 +20,7 @@ void Logger::log(std::string msg, LogType T)
             std::cerr << "| " + localTimeToString(current_t) + " | " + sqc_orange + "WARNING: " + msg + sqc_reset << std::endl;
             break;
         case LogType::ERROR:
-            std::cerr << "| " + localTimeToString(current_t) + " | " + sqc_orange + "#ERROR# " + msg + sqc_reset << std::endl;
+            std::cerr << "| " + localTimeToString(current_t) + " | " + sqc_red + "#ERROR# " + msg + sqc_reset << std::endl;
     }
 }
 

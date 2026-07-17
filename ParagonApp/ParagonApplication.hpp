@@ -8,6 +8,7 @@
 #include <typeindex>
 
 #include "state/ParagonStateManager.hpp"
+#include "system/ui/UIEntityManager.hpp"
 
 class ParagonApplication : public Application
 {

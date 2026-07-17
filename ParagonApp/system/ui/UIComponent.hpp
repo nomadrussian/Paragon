@@ -3,8 +3,8 @@
 
 #include <common/Component.hpp>
 #include <core/render/RenderHandler.hpp>
-#include <core/asset/Font.hpp>
-#include <core/asset/Texture.hpp>
+#include <core/asset/FontResource.hpp>
+#include <core/asset/TextureResource.hpp>
 #include <util/lua/LuaScript.hpp>
 
 #include <memory>

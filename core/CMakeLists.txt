@@ -9,11 +9,23 @@ file(GLOB CORE_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/event/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/input/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/input/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/lua/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/lua/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/render/*.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/render/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/resource/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/resource/*.cpp"
 )
 
-add_library(core SHARED ${CORE_SOURCES})
+add_library(core SHARED ${CORE_SOURCES}
+    asset/AssetManager.hpp asset/AssetManager.cpp
+    asset/Asset.hpp asset/Asset.cpp
+    asset/AssetRegistry.hpp asset/AssetRegistry.cpp
+    resource/ResourceManager.hpp resource/ResourceManager.cpp
+    resource/MaterialResource.hpp resource/MaterialResource.cpp
+    resource/SFXResource.hpp resource/SFXResource.cpp
+    resource/ScriptResource.hpp resource/ScriptResource.cpp
+    asset/MetaConfig.hpp asset/MetaConfig.cpp)
 
 target_include_directories(core
     PUBLIC
@@ -37,22 +49,9 @@ set_target_properties(core
 add_custom_command(
     TARGET core POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/data
-            ${CMAKE_CURRENT_BINARY_DIR}/../data
+            ${CMAKE_SOURCE_DIR}/data/core
+            ${CMAKE_CURRENT_BINARY_DIR}/../data/core
 )
 
-add_custom_command(
-    TARGET core POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/shaders
-            ${CMAKE_CURRENT_BINARY_DIR}/../shaders
-)
-
-add_custom_command(
-    TARGET core POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/config
-            ${CMAKE_CURRENT_BINARY_DIR}/../config
-)
 
 

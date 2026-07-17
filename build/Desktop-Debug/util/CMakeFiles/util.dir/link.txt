@@ -1,0 +1,2 @@
+/usr/bin/x86_64-linux-gnu-ar qc libutil.a CMakeFiles/util.dir/Debugger.cpp.o CMakeFiles/util.dir/FileManager.cpp.o CMakeFiles/util.dir/Log.cpp.o
+/usr/bin/x86_64-linux-gnu-ranlib libutil.a

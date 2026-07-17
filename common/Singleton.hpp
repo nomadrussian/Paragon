@@ -10,7 +10,7 @@ template <typename T>
 class Singleton
 {
 protected:
-    static T* instance;
+    static inline T* instance = nullptr;
 
 public:
     static void init()
@@ -56,8 +56,9 @@ protected:
     }
 
 private:
-    Singleton operator=(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
     Singleton(const Singleton&) = delete;
+    Singleton& operator=(Singleton&&) = delete;
     Singleton(Singleton&&) = delete;
 };
 

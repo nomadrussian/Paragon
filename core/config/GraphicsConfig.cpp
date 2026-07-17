@@ -9,8 +9,8 @@
 dimensions2D GraphicsConfig::RESOLUTION = { 1024, 768 };
 float GraphicsConfig::ASPECT = 1.3333333f;
 float GraphicsConfig::FOV_VERTICAL = 47.0f;
-bool GraphicsConfig::FULLSCREEN = false;
-bool GraphicsConfig::VSYNC = true;
+bool GraphicsConfig::FULLSCREEN = true;
+bool GraphicsConfig::VSYNC = false;
 unsigned GraphicsConfig::MSAA = 1;
 
 #ifdef PARAGON_DEBUG

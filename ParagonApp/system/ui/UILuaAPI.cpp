@@ -16,7 +16,6 @@
  */
 namespace UILuaAPI
 {
-    UIEntityManager& entityManager = UIEntityManager::getInstance();
     const std::string api_error = "UILuaAPI error: ";
 
     void registerFunctions(lua_State* L)
@@ -41,7 +40,7 @@ namespace UILuaAPI
      * @parameter7: textlabel (string)
      * @parameter8: texture (number)
      */
-    int lua_ui_clickbutton_create(lua_State* L)
+    int lua_ui_button_create(lua_State* L)
     {
         glm::vec2 transfromVector = {
             static_cast<GLfloat>(luaL_checknumber(L, 1)),
@@ -58,17 +57,22 @@ namespace UILuaAPI
         UIClickComponent* pUIClickComponent;
         UITextComponent* pUITextComponent;
 
-        UIEntityID newButton = entityManager.createNewEntity();
-        if (pUIRectangleComponent != entityManager.addComponent<UIRectangleComponent>(newButton))
+        UIEntityID newButton = UIEntityManager::getInstance().createNewEntity();
+        if (pUIRectangleComponent != UIEntityManager::getInstance().addComponent<UIRectangleComponent>(newButton))
         {
-            log_error(std::string())
+            //log_error(std::string())
         }
-        entityManager.addComponent<UITransform2DComponent>(newButton);
-        entityManager.addComponent<UIClickComponent>(newButton);
-        entityManager.addComponent<UIHoverableComponent>(newButton);
-        entityManager.addComponent<UITextComponent>(newButton);
+        UIEntityManager::getInstance().addComponent<UITransform2DComponent>(newButton);
+        UIEntityManager::getInstance().addComponent<UIClickComponent>(newButton);
+        UIEntityManager::getInstance().addComponent<UIHoverableComponent>(newButton);
+        UIEntityManager::getInstance().addComponent<UITextComponent>(newButton);
 
         lua_pushinteger(L, newButton);
+        return 1;
+    }
+
+    int lua_ui_button_destroy(lua_State* L)
+    {
         return 1;
     }
 
@@ -79,6 +83,6 @@ namespace UILuaAPI
 
     namespace
     {
-        float getMandatoryFloat(lua_State* L, int tableIndex, )
+        //float getMandatoryFloat(lua_State* L, int tableIndex, )
     }
 }

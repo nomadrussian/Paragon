@@ -2,7 +2,7 @@
 #define TEXTRENDERER_HPP
 
 #include <core/asset/AssetManager.hpp>
-#include <core/asset/Font.hpp>
+#include <core/resource/FontResource.hpp>
 
 #include <memory>
 #include <string>

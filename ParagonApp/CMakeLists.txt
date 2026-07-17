@@ -32,12 +32,13 @@ set_target_properties(ParagonApp
     RPATH "$ORIGIN"
 )
 
-target_include_directories(ParagonApp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(util PUBLIC /usr/include/lua5.4)
+target_include_directories(ParagonApp PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    /usr/include/lua5.4
+)
 
-find_package(GLEW REQUIRED)
 target_link_libraries(ParagonApp PRIVATE
-    common core util
+    common core util lua5.4
 )
 
 target_link_libraries(ParagonApp
@@ -48,7 +49,7 @@ target_link_libraries(ParagonApp
 add_custom_command(
     TARGET ParagonApp POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/scripts
-            ${CMAKE_CURRENT_BINARY_DIR}/../scripts
+            ${CMAKE_SOURCE_DIR}/data
+            ${CMAKE_CURRENT_BINARY_DIR}/../data
 )
 

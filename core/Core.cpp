@@ -2,7 +2,6 @@
 
 #include <util/Debugger.hpp>
 #include <util/Log.hpp>
-#include <util/lua/LuaManager.hpp>
 
 #include <cassert>
 
@@ -22,11 +21,11 @@ Core::Core()
     log_debug("Initializing AssetManager...");
     AssetManager::init();
 
-    log_debug("Initializing graphics...");
-    initGraphics();
-
     log_debug("Initializing CoreEventManager...");
     CoreEventManager::init();
+
+    log_debug("Initializing graphics...");
+    initGraphics();
 
     log_debug("Initializing InputHandler...");
     inputHandler = std::make_unique<InputHandler>();
@@ -42,9 +41,6 @@ Core::Core()
     mouseListener = std::make_shared<MouseListener>();
     keyboardListener->init();
     mouseListener->init();
-
-    log_debug("Initializing Lua...");
-    LuaManager::init();
 
     log_debug("Core initialization has been completed");
 }

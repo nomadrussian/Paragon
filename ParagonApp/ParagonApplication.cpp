@@ -4,6 +4,7 @@
 #include <core/render/RenderHandler.hpp>
 #include <util/Debugger.hpp>
 #include <util/Log.hpp>
+#include <util/lua/LuaManager.hpp>
 
 #include "config/ParagonConfig.hpp"
 #include "event/ParagonEventManager.hpp"
@@ -18,11 +19,17 @@ ParagonApplication::ParagonApplication()
 
 void ParagonApplication::init()
 {
+    log_debug("Initializing Lua...");
+    LuaManager::init();
+
     log_debug("Initializing ParagonEventManager...");
     ParagonEventManager::init();
 
     log_debug("Initializing ParagonStateManager...");
     stateManager = std::make_unique<ParagonStateManager>();
+
+    log_debug("Initializing UIEntityManager");
+    UIEntityManager::init();
 
     log_debug("ParagonApplication has been initialized");
 }

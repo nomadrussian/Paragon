@@ -17,7 +17,8 @@ protected:
     Component() = default;
     Component& operator=(const Component&) = delete;
     Component(const Component&) = delete;
-    Component(Component&&) = delete;
+    Component(Component&&) = default;
+    Component& operator=(Component&&) = default;
     virtual ~Component() = default;
 };
 
@@ -31,7 +32,7 @@ public:
     virtual void addEntity(EntityIDT entity) = 0;
     virtual void removeEntity(EntityIDT entity) = 0;
     virtual bool hasEntity(EntityIDT entity) const = 0;
-    virtual void* getComponentRaw(EntityIDT entity) const = 0;
+    virtual void* getComponentRaw(EntityIDT entity) = 0;
     virtual size_t getNumberOfEntities() const = 0;
     virtual void removeAllEntities() = 0;
 };
@@ -84,7 +85,7 @@ public:
         return componentMap.contains(entity);
     }
 
-    ComponentT* getComponent(EntityIDT entity) const
+    ComponentT* getComponent(EntityIDT entity)
     {
         if (!hasEntity(entity))
         {
@@ -98,7 +99,7 @@ public:
         return &componentMap.at(entity);
     }
 
-    void* getComponentRaw(EntityIDT entity) const override
+    void* getComponentRaw(EntityIDT entity) override
     {
         return static_cast<void*>(getComponent(entity));
     }
@@ -176,7 +177,7 @@ public:
         return entityToIndexMap.contains(entity);
     }
 
-    ComponentT* getComponent(EntityIDT entity) const
+    ComponentT* getComponent(EntityIDT entity)
     {
         if (!hasEntity(entity))
         {
@@ -190,7 +191,7 @@ public:
         return &componentList.at(getEntityIndex(entity));
     }
 
-    void* getComponentRaw(EntityIDT entity) const override
+    void* getComponentRaw(EntityIDT entity) override
     {
         return static_cast<void*>(getComponent(entity));
     }

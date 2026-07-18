@@ -125,10 +125,24 @@ core/CMakeFiles/core.dir/asset/Asset.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/asset/Asset.cpp.s"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ixnomad/code/Paragon/core/asset/Asset.cpp -o CMakeFiles/core.dir/asset/Asset.cpp.s
 
+core/CMakeFiles/core.dir/asset/AssetLoader.cpp.o: core/CMakeFiles/core.dir/flags.make
+core/CMakeFiles/core.dir/asset/AssetLoader.cpp.o: /home/ixnomad/code/Paragon/core/asset/AssetLoader.cpp
+core/CMakeFiles/core.dir/asset/AssetLoader.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object core/CMakeFiles/core.dir/asset/AssetLoader.cpp.o"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/asset/AssetLoader.cpp.o -MF CMakeFiles/core.dir/asset/AssetLoader.cpp.o.d -o CMakeFiles/core.dir/asset/AssetLoader.cpp.o -c /home/ixnomad/code/Paragon/core/asset/AssetLoader.cpp
+
+core/CMakeFiles/core.dir/asset/AssetLoader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/core.dir/asset/AssetLoader.cpp.i"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ixnomad/code/Paragon/core/asset/AssetLoader.cpp > CMakeFiles/core.dir/asset/AssetLoader.cpp.i
+
+core/CMakeFiles/core.dir/asset/AssetLoader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/asset/AssetLoader.cpp.s"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ixnomad/code/Paragon/core/asset/AssetLoader.cpp -o CMakeFiles/core.dir/asset/AssetLoader.cpp.s
+
 core/CMakeFiles/core.dir/asset/AssetManager.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/asset/AssetManager.cpp.o: /home/ixnomad/code/Paragon/core/asset/AssetManager.cpp
 core/CMakeFiles/core.dir/asset/AssetManager.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object core/CMakeFiles/core.dir/asset/AssetManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object core/CMakeFiles/core.dir/asset/AssetManager.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/asset/AssetManager.cpp.o -MF CMakeFiles/core.dir/asset/AssetManager.cpp.o.d -o CMakeFiles/core.dir/asset/AssetManager.cpp.o -c /home/ixnomad/code/Paragon/core/asset/AssetManager.cpp
 
 core/CMakeFiles/core.dir/asset/AssetManager.cpp.i: cmake_force
@@ -142,7 +156,7 @@ core/CMakeFiles/core.dir/asset/AssetManager.cpp.s: cmake_force
 core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o: /home/ixnomad/code/Paragon/core/asset/AssetManager_BROKEN_LEGACY.cpp
 core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o -MF CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o.d -o CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o -c /home/ixnomad/code/Paragon/core/asset/AssetManager_BROKEN_LEGACY.cpp
 
 core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.i: cmake_force
@@ -156,7 +170,7 @@ core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.s: cmake_force
 core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o: /home/ixnomad/code/Paragon/core/asset/AssetRegistry.cpp
 core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o -MF CMakeFiles/core.dir/asset/AssetRegistry.cpp.o.d -o CMakeFiles/core.dir/asset/AssetRegistry.cpp.o -c /home/ixnomad/code/Paragon/core/asset/AssetRegistry.cpp
 
 core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.i: cmake_force
@@ -167,10 +181,24 @@ core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/asset/AssetRegistry.cpp.s"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ixnomad/code/Paragon/core/asset/AssetRegistry.cpp -o CMakeFiles/core.dir/asset/AssetRegistry.cpp.s
 
+core/CMakeFiles/core.dir/asset/AssetScanner.cpp.o: core/CMakeFiles/core.dir/flags.make
+core/CMakeFiles/core.dir/asset/AssetScanner.cpp.o: /home/ixnomad/code/Paragon/core/asset/AssetScanner.cpp
+core/CMakeFiles/core.dir/asset/AssetScanner.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object core/CMakeFiles/core.dir/asset/AssetScanner.cpp.o"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/asset/AssetScanner.cpp.o -MF CMakeFiles/core.dir/asset/AssetScanner.cpp.o.d -o CMakeFiles/core.dir/asset/AssetScanner.cpp.o -c /home/ixnomad/code/Paragon/core/asset/AssetScanner.cpp
+
+core/CMakeFiles/core.dir/asset/AssetScanner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/core.dir/asset/AssetScanner.cpp.i"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ixnomad/code/Paragon/core/asset/AssetScanner.cpp > CMakeFiles/core.dir/asset/AssetScanner.cpp.i
+
+core/CMakeFiles/core.dir/asset/AssetScanner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/asset/AssetScanner.cpp.s"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ixnomad/code/Paragon/core/asset/AssetScanner.cpp -o CMakeFiles/core.dir/asset/AssetScanner.cpp.s
+
 core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o: /home/ixnomad/code/Paragon/core/config/GraphicsConfig.cpp
 core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o -MF CMakeFiles/core.dir/config/GraphicsConfig.cpp.o.d -o CMakeFiles/core.dir/config/GraphicsConfig.cpp.o -c /home/ixnomad/code/Paragon/core/config/GraphicsConfig.cpp
 
 core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.i: cmake_force
@@ -184,7 +212,7 @@ core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.s: cmake_force
 core/CMakeFiles/core.dir/config/MetaConfig.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/config/MetaConfig.cpp.o: /home/ixnomad/code/Paragon/core/config/MetaConfig.cpp
 core/CMakeFiles/core.dir/config/MetaConfig.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object core/CMakeFiles/core.dir/config/MetaConfig.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object core/CMakeFiles/core.dir/config/MetaConfig.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/config/MetaConfig.cpp.o -MF CMakeFiles/core.dir/config/MetaConfig.cpp.o.d -o CMakeFiles/core.dir/config/MetaConfig.cpp.o -c /home/ixnomad/code/Paragon/core/config/MetaConfig.cpp
 
 core/CMakeFiles/core.dir/config/MetaConfig.cpp.i: cmake_force
@@ -198,7 +226,7 @@ core/CMakeFiles/core.dir/config/MetaConfig.cpp.s: cmake_force
 core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o: /home/ixnomad/code/Paragon/core/event/CoreEventManager.cpp
 core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o -MF CMakeFiles/core.dir/event/CoreEventManager.cpp.o.d -o CMakeFiles/core.dir/event/CoreEventManager.cpp.o -c /home/ixnomad/code/Paragon/core/event/CoreEventManager.cpp
 
 core/CMakeFiles/core.dir/event/CoreEventManager.cpp.i: cmake_force
@@ -212,7 +240,7 @@ core/CMakeFiles/core.dir/event/CoreEventManager.cpp.s: cmake_force
 core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o: /home/ixnomad/code/Paragon/core/event/CoreEventTypeGraph.cpp
 core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o -MF CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o.d -o CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.o -c /home/ixnomad/code/Paragon/core/event/CoreEventTypeGraph.cpp
 
 core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.i: cmake_force
@@ -226,7 +254,7 @@ core/CMakeFiles/core.dir/event/CoreEventTypeGraph.cpp.s: cmake_force
 core/CMakeFiles/core.dir/input/InputHandler.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/input/InputHandler.cpp.o: /home/ixnomad/code/Paragon/core/input/InputHandler.cpp
 core/CMakeFiles/core.dir/input/InputHandler.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object core/CMakeFiles/core.dir/input/InputHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object core/CMakeFiles/core.dir/input/InputHandler.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/input/InputHandler.cpp.o -MF CMakeFiles/core.dir/input/InputHandler.cpp.o.d -o CMakeFiles/core.dir/input/InputHandler.cpp.o -c /home/ixnomad/code/Paragon/core/input/InputHandler.cpp
 
 core/CMakeFiles/core.dir/input/InputHandler.cpp.i: cmake_force
@@ -240,7 +268,7 @@ core/CMakeFiles/core.dir/input/InputHandler.cpp.s: cmake_force
 core/CMakeFiles/core.dir/input/KeyboardListener.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/input/KeyboardListener.cpp.o: /home/ixnomad/code/Paragon/core/input/KeyboardListener.cpp
 core/CMakeFiles/core.dir/input/KeyboardListener.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object core/CMakeFiles/core.dir/input/KeyboardListener.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object core/CMakeFiles/core.dir/input/KeyboardListener.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/input/KeyboardListener.cpp.o -MF CMakeFiles/core.dir/input/KeyboardListener.cpp.o.d -o CMakeFiles/core.dir/input/KeyboardListener.cpp.o -c /home/ixnomad/code/Paragon/core/input/KeyboardListener.cpp
 
 core/CMakeFiles/core.dir/input/KeyboardListener.cpp.i: cmake_force
@@ -254,7 +282,7 @@ core/CMakeFiles/core.dir/input/KeyboardListener.cpp.s: cmake_force
 core/CMakeFiles/core.dir/input/MouseListener.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/input/MouseListener.cpp.o: /home/ixnomad/code/Paragon/core/input/MouseListener.cpp
 core/CMakeFiles/core.dir/input/MouseListener.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object core/CMakeFiles/core.dir/input/MouseListener.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object core/CMakeFiles/core.dir/input/MouseListener.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/input/MouseListener.cpp.o -MF CMakeFiles/core.dir/input/MouseListener.cpp.o.d -o CMakeFiles/core.dir/input/MouseListener.cpp.o -c /home/ixnomad/code/Paragon/core/input/MouseListener.cpp
 
 core/CMakeFiles/core.dir/input/MouseListener.cpp.i: cmake_force
@@ -268,7 +296,7 @@ core/CMakeFiles/core.dir/input/MouseListener.cpp.s: cmake_force
 core/CMakeFiles/core.dir/lua/LuaManager.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/lua/LuaManager.cpp.o: /home/ixnomad/code/Paragon/core/lua/LuaManager.cpp
 core/CMakeFiles/core.dir/lua/LuaManager.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object core/CMakeFiles/core.dir/lua/LuaManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object core/CMakeFiles/core.dir/lua/LuaManager.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/lua/LuaManager.cpp.o -MF CMakeFiles/core.dir/lua/LuaManager.cpp.o.d -o CMakeFiles/core.dir/lua/LuaManager.cpp.o -c /home/ixnomad/code/Paragon/core/lua/LuaManager.cpp
 
 core/CMakeFiles/core.dir/lua/LuaManager.cpp.i: cmake_force
@@ -282,7 +310,7 @@ core/CMakeFiles/core.dir/lua/LuaManager.cpp.s: cmake_force
 core/CMakeFiles/core.dir/lua/LuaScript.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/lua/LuaScript.cpp.o: /home/ixnomad/code/Paragon/core/lua/LuaScript.cpp
 core/CMakeFiles/core.dir/lua/LuaScript.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object core/CMakeFiles/core.dir/lua/LuaScript.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object core/CMakeFiles/core.dir/lua/LuaScript.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/lua/LuaScript.cpp.o -MF CMakeFiles/core.dir/lua/LuaScript.cpp.o.d -o CMakeFiles/core.dir/lua/LuaScript.cpp.o -c /home/ixnomad/code/Paragon/core/lua/LuaScript.cpp
 
 core/CMakeFiles/core.dir/lua/LuaScript.cpp.i: cmake_force
@@ -296,7 +324,7 @@ core/CMakeFiles/core.dir/lua/LuaScript.cpp.s: cmake_force
 core/CMakeFiles/core.dir/render/Camera.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/render/Camera.cpp.o: /home/ixnomad/code/Paragon/core/render/Camera.cpp
 core/CMakeFiles/core.dir/render/Camera.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object core/CMakeFiles/core.dir/render/Camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object core/CMakeFiles/core.dir/render/Camera.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/render/Camera.cpp.o -MF CMakeFiles/core.dir/render/Camera.cpp.o.d -o CMakeFiles/core.dir/render/Camera.cpp.o -c /home/ixnomad/code/Paragon/core/render/Camera.cpp
 
 core/CMakeFiles/core.dir/render/Camera.cpp.i: cmake_force
@@ -310,7 +338,7 @@ core/CMakeFiles/core.dir/render/Camera.cpp.s: cmake_force
 core/CMakeFiles/core.dir/render/RenderHandler.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/render/RenderHandler.cpp.o: /home/ixnomad/code/Paragon/core/render/RenderHandler.cpp
 core/CMakeFiles/core.dir/render/RenderHandler.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object core/CMakeFiles/core.dir/render/RenderHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object core/CMakeFiles/core.dir/render/RenderHandler.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/render/RenderHandler.cpp.o -MF CMakeFiles/core.dir/render/RenderHandler.cpp.o.d -o CMakeFiles/core.dir/render/RenderHandler.cpp.o -c /home/ixnomad/code/Paragon/core/render/RenderHandler.cpp
 
 core/CMakeFiles/core.dir/render/RenderHandler.cpp.i: cmake_force
@@ -324,7 +352,7 @@ core/CMakeFiles/core.dir/render/RenderHandler.cpp.s: cmake_force
 core/CMakeFiles/core.dir/render/ShaderManager.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/render/ShaderManager.cpp.o: /home/ixnomad/code/Paragon/core/render/ShaderManager.cpp
 core/CMakeFiles/core.dir/render/ShaderManager.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object core/CMakeFiles/core.dir/render/ShaderManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object core/CMakeFiles/core.dir/render/ShaderManager.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/render/ShaderManager.cpp.o -MF CMakeFiles/core.dir/render/ShaderManager.cpp.o.d -o CMakeFiles/core.dir/render/ShaderManager.cpp.o -c /home/ixnomad/code/Paragon/core/render/ShaderManager.cpp
 
 core/CMakeFiles/core.dir/render/ShaderManager.cpp.i: cmake_force
@@ -338,7 +366,7 @@ core/CMakeFiles/core.dir/render/ShaderManager.cpp.s: cmake_force
 core/CMakeFiles/core.dir/render/TextRenderer.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/render/TextRenderer.cpp.o: /home/ixnomad/code/Paragon/core/render/TextRenderer.cpp
 core/CMakeFiles/core.dir/render/TextRenderer.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object core/CMakeFiles/core.dir/render/TextRenderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object core/CMakeFiles/core.dir/render/TextRenderer.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/render/TextRenderer.cpp.o -MF CMakeFiles/core.dir/render/TextRenderer.cpp.o.d -o CMakeFiles/core.dir/render/TextRenderer.cpp.o -c /home/ixnomad/code/Paragon/core/render/TextRenderer.cpp
 
 core/CMakeFiles/core.dir/render/TextRenderer.cpp.i: cmake_force
@@ -352,7 +380,7 @@ core/CMakeFiles/core.dir/render/TextRenderer.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/FontResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/FontResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/FontResource.cpp
 core/CMakeFiles/core.dir/resource/FontResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object core/CMakeFiles/core.dir/resource/FontResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object core/CMakeFiles/core.dir/resource/FontResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/FontResource.cpp.o -MF CMakeFiles/core.dir/resource/FontResource.cpp.o.d -o CMakeFiles/core.dir/resource/FontResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/FontResource.cpp
 
 core/CMakeFiles/core.dir/resource/FontResource.cpp.i: cmake_force
@@ -366,7 +394,7 @@ core/CMakeFiles/core.dir/resource/FontResource.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/MaterialResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/MaterialResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/MaterialResource.cpp
 core/CMakeFiles/core.dir/resource/MaterialResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object core/CMakeFiles/core.dir/resource/MaterialResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object core/CMakeFiles/core.dir/resource/MaterialResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/MaterialResource.cpp.o -MF CMakeFiles/core.dir/resource/MaterialResource.cpp.o.d -o CMakeFiles/core.dir/resource/MaterialResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/MaterialResource.cpp
 
 core/CMakeFiles/core.dir/resource/MaterialResource.cpp.i: cmake_force
@@ -380,7 +408,7 @@ core/CMakeFiles/core.dir/resource/MaterialResource.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/MeshResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/MeshResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/MeshResource.cpp
 core/CMakeFiles/core.dir/resource/MeshResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object core/CMakeFiles/core.dir/resource/MeshResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object core/CMakeFiles/core.dir/resource/MeshResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/MeshResource.cpp.o -MF CMakeFiles/core.dir/resource/MeshResource.cpp.o.d -o CMakeFiles/core.dir/resource/MeshResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/MeshResource.cpp
 
 core/CMakeFiles/core.dir/resource/MeshResource.cpp.i: cmake_force
@@ -394,7 +422,7 @@ core/CMakeFiles/core.dir/resource/MeshResource.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/ResourceManager.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/ResourceManager.cpp.o: /home/ixnomad/code/Paragon/core/resource/ResourceManager.cpp
 core/CMakeFiles/core.dir/resource/ResourceManager.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object core/CMakeFiles/core.dir/resource/ResourceManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object core/CMakeFiles/core.dir/resource/ResourceManager.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/ResourceManager.cpp.o -MF CMakeFiles/core.dir/resource/ResourceManager.cpp.o.d -o CMakeFiles/core.dir/resource/ResourceManager.cpp.o -c /home/ixnomad/code/Paragon/core/resource/ResourceManager.cpp
 
 core/CMakeFiles/core.dir/resource/ResourceManager.cpp.i: cmake_force
@@ -408,7 +436,7 @@ core/CMakeFiles/core.dir/resource/ResourceManager.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/SFXResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/SFXResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/SFXResource.cpp
 core/CMakeFiles/core.dir/resource/SFXResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object core/CMakeFiles/core.dir/resource/SFXResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object core/CMakeFiles/core.dir/resource/SFXResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/SFXResource.cpp.o -MF CMakeFiles/core.dir/resource/SFXResource.cpp.o.d -o CMakeFiles/core.dir/resource/SFXResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/SFXResource.cpp
 
 core/CMakeFiles/core.dir/resource/SFXResource.cpp.i: cmake_force
@@ -422,7 +450,7 @@ core/CMakeFiles/core.dir/resource/SFXResource.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/ScriptResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/ScriptResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/ScriptResource.cpp
 core/CMakeFiles/core.dir/resource/ScriptResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object core/CMakeFiles/core.dir/resource/ScriptResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object core/CMakeFiles/core.dir/resource/ScriptResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/ScriptResource.cpp.o -MF CMakeFiles/core.dir/resource/ScriptResource.cpp.o.d -o CMakeFiles/core.dir/resource/ScriptResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/ScriptResource.cpp
 
 core/CMakeFiles/core.dir/resource/ScriptResource.cpp.i: cmake_force
@@ -436,7 +464,7 @@ core/CMakeFiles/core.dir/resource/ScriptResource.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/ShaderResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/ShaderResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/ShaderResource.cpp
 core/CMakeFiles/core.dir/resource/ShaderResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object core/CMakeFiles/core.dir/resource/ShaderResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object core/CMakeFiles/core.dir/resource/ShaderResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/ShaderResource.cpp.o -MF CMakeFiles/core.dir/resource/ShaderResource.cpp.o.d -o CMakeFiles/core.dir/resource/ShaderResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/ShaderResource.cpp
 
 core/CMakeFiles/core.dir/resource/ShaderResource.cpp.i: cmake_force
@@ -450,7 +478,7 @@ core/CMakeFiles/core.dir/resource/ShaderResource.cpp.s: cmake_force
 core/CMakeFiles/core.dir/resource/TextureResource.cpp.o: core/CMakeFiles/core.dir/flags.make
 core/CMakeFiles/core.dir/resource/TextureResource.cpp.o: /home/ixnomad/code/Paragon/core/resource/TextureResource.cpp
 core/CMakeFiles/core.dir/resource/TextureResource.cpp.o: core/CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object core/CMakeFiles/core.dir/resource/TextureResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object core/CMakeFiles/core.dir/resource/TextureResource.cpp.o"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/core.dir/resource/TextureResource.cpp.o -MF CMakeFiles/core.dir/resource/TextureResource.cpp.o.d -o CMakeFiles/core.dir/resource/TextureResource.cpp.o -c /home/ixnomad/code/Paragon/core/resource/TextureResource.cpp
 
 core/CMakeFiles/core.dir/resource/TextureResource.cpp.i: cmake_force
@@ -467,9 +495,11 @@ core_OBJECTS = \
 "CMakeFiles/core.dir/Cube.cpp.o" \
 "CMakeFiles/core.dir/MainWindow.cpp.o" \
 "CMakeFiles/core.dir/asset/Asset.cpp.o" \
+"CMakeFiles/core.dir/asset/AssetLoader.cpp.o" \
 "CMakeFiles/core.dir/asset/AssetManager.cpp.o" \
 "CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o" \
 "CMakeFiles/core.dir/asset/AssetRegistry.cpp.o" \
+"CMakeFiles/core.dir/asset/AssetScanner.cpp.o" \
 "CMakeFiles/core.dir/config/GraphicsConfig.cpp.o" \
 "CMakeFiles/core.dir/config/MetaConfig.cpp.o" \
 "CMakeFiles/core.dir/event/CoreEventManager.cpp.o" \
@@ -499,9 +529,11 @@ ParagonApp/libcore.so: core/CMakeFiles/core.dir/Core.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/Cube.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/MainWindow.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/asset/Asset.cpp.o
+ParagonApp/libcore.so: core/CMakeFiles/core.dir/asset/AssetLoader.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/asset/AssetManager.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/asset/AssetManager_BROKEN_LEGACY.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/asset/AssetRegistry.cpp.o
+ParagonApp/libcore.so: core/CMakeFiles/core.dir/asset/AssetScanner.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/config/GraphicsConfig.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/config/MetaConfig.cpp.o
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/event/CoreEventManager.cpp.o
@@ -528,7 +560,7 @@ ParagonApp/libcore.so: common/libcommon.a
 ParagonApp/libcore.so: util/libutil.a
 ParagonApp/libcore.so: /usr/lib/x86_64-linux-gnu/libGLEW.so
 ParagonApp/libcore.so: core/CMakeFiles/core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Linking CXX shared library ../ParagonApp/libcore.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX shared library ../ParagonApp/libcore.so"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/core.dir/link.txt --verbose=$(VERBOSE)
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/core && /usr/bin/cmake -E copy_directory /home/ixnomad/code/Paragon/data/core /home/ixnomad/code/Paragon/build/Desktop-Debug/core/../data/core
 

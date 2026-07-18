@@ -17,7 +17,7 @@ const std::string& Asset::getFilePath() const
 
 const std::string& Asset::getMetadataPath() const
 {
-    return metaDataPath;
+    return metadataPath;
 }
 
 AssetStatus Asset::getStatus() const

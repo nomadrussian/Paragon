@@ -1,58 +1,90 @@
 #include "GraphicsConfig.hpp"
 
-#include <external/include/nlohmann_json.hpp>
-#include <util/FileManager.hpp>
 #include <util/Log.hpp>
+#include <util/Math.hpp>
 
-#include <glm/glm.hpp>
+#include <algorithm>
 
-dimensions2D GraphicsConfig::RESOLUTION = { 1024, 768 };
-float GraphicsConfig::ASPECT = 1.3333333f;
-float GraphicsConfig::FOV_VERTICAL = 47.0f;
-bool GraphicsConfig::FULLSCREEN = true;
-bool GraphicsConfig::VSYNC = false;
-unsigned GraphicsConfig::MSAA = 1;
-
-#ifdef PARAGON_DEBUG
-bool GraphicsConfig::DEBUG_SCREEN = true;
-#endif
-
-void GraphicsConfig::loadConfig(std::string configFilePath)
+void GraphicsConfig::loadConfig(const std::string& configFilePath)
 {
-    std::ifstream rawConfigData(configFilePath);
-    if (!rawConfigData)
+    loadConfigData(configFilePath);
+
+    loadValue("RESOLUTION_WIDTH", RESOLUTION.WIDTH);
+    loadValue("RESOLUTION_HEIGHT", RESOLUTION.HEIGHT);
+    loadValue("ASPECT", ASPECT);
+    loadValue("FULLSCREEN", FULLSCREEN);
+    loadValue("VSYNC", VSYNC);
+    loadValue("MSAA", MSAA);
+    loadValue("FOV", FOV_HORIZONTAL);
+
+    if (!Math::valueIsInRange(RESOLUTION.WIDTH, RESOLUTION_WIDTH_MIN, RESOLUTION_WIDTH_MAX) ||
+        !Math::valueIsInRange(RESOLUTION.HEIGHT, RESOLUTION_HEIGHT_MIN, RESOLUTION_HEIGHT_MAX))
     {
-        log_error(std::string("Unable to open graphics config file ") + configFilePath);
-        return;
+        RESOLUTION = RESOLUTION_FALLBACK_DEFAULT;
+        log_warning(
+            std::format(
+                "Unsupported resolution (must be from {}x{} to {}x{}), switched to fallback default {}x{}",
+                RESOLUTION_WIDTH_MIN,
+                RESOLUTION_HEIGHT_MIN,
+                RESOLUTION_WIDTH_MAX,
+                RESOLUTION_HEIGHT_MAX,
+                RESOLUTION_FALLBACK_DEFAULT.WIDTH,
+                RESOLUTION_FALLBACK_DEFAULT.HEIGHT
+            )
+        );
     }
 
-    nlohmann::json configData;
-    try {
-        rawConfigData >> configData;
-    }  catch (const nlohmann::json::parse_error& e) {
-        log_error(std::string("Error parsing graphics config from ") + configFilePath);
-        return;
+    if (!Math::valueIsInRange(ASPECT, ASPECT_MIN, ASPECT_MAX))
+    {
+        ASPECT = ASPECT_FALLBACK_DEFAULT;
+        log_warning(
+            std::format(
+                "Unsupported aspect (must be from {} to {}), switched to fallback default {}",
+                ASPECT_MIN,
+                ASPECT_MAX,
+                ASPECT_FALLBACK_DEFAULT
+            )
+        );
     }
 
-    if (configData.contains("RESOLUTION_WIDTH")) GraphicsConfig::RESOLUTION.WIDTH = configData["RESOLUTION_WIDTH"].get<unsigned>();
-    if (configData.contains("RESOLUTION_HEIGHT")) GraphicsConfig::RESOLUTION.HEIGHT = configData["RESOLUTION_HEIGHT"].get<unsigned>();
-    if (configData.contains("ASPECT")) GraphicsConfig::ASPECT = configData["ASPECT"].get<float>();
-    if (configData.contains("FULLSCREEN")) GraphicsConfig::FULLSCREEN = configData["FULLSCREEN"].get<bool>();
-    if (configData.contains("VSYNC")) GraphicsConfig::VSYNC = configData["VSYNC"].get<bool>();
-    if (configData.contains("MSAA"))
+    if (!Math::valueIsInRange(FOV_HORIZONTAL, FOV_HORIZONTAL_MIN, FOV_HORIZONTAL_MAX))
     {
-        unsigned s = configData["MSAA"].get<unsigned>();
-        if (s == 2 || s == 4 || s == 8 || s == 16) GraphicsConfig::MSAA = configData["MSAA"].get<unsigned>();
+        FOV_HORIZONTAL = FOV_HORIZONTAL_FALLBACK_DEFAULT;
+        log_warning(
+            std::format(
+                "Unsupported drunk FOV (must be from {} to {}), switched to fallback default {}",
+                FOV_HORIZONTAL_MIN,
+                FOV_HORIZONTAL_MAX,
+                FOV_HORIZONTAL_FALLBACK_DEFAULT
+            )
+        );
     }
-    if (configData.contains("FOV")) GraphicsConfig::FOV_VERTICAL = glm::degrees(2.0f * atan(tan(glm::radians(configData["FOV"].get<float>()) / 2.0f) / ASPECT));
+
+    {
+        auto it = std::find(MSAA_AVAILABLE_OPTIONS.begin(), MSAA_AVAILABLE_OPTIONS.end(), MSAA);
+        if (it == MSAA_AVAILABLE_OPTIONS.end())
+        {
+            MSAA = MSAA_FALLBACK_DEFAULT;
+            log_warning(
+                std::format(
+                    "Unsupported MSAA value (must be {}), switched to fallback default {}",
+                    MSAA_AVAILABLE_OPTIONS,
+                    MSAA_FALLBACK_DEFAULT
+                )
+            );
+        }
+    }
+
+    FOV_VERTICAL = Math::FOVHorizontalToFOVVertical(FOV_HORIZONTAL, ASPECT);
 }
 
 void GraphicsConfig::resetToDefault()
 {
-    RESOLUTION = { 1280, 720 };
-    ASPECT = 1.7777778f;
-    FOV_VERTICAL = 47.0f;
-    FULLSCREEN = false;
-    VSYNC = true;
-    MSAA = 1;
+    RESOLUTION = RESOLUTION_DEFAULT;
+    ASPECT = ASPECT_DEFAULT;
+    FULLSCREEN = FULLSCREEN_DEFAULT;
+    VSYNC = VSYNC_DEFAULT;
+    MSAA = MSAA_DEFAULT;
+    FOV_HORIZONTAL = FOV_HORIZONTAL_DEFAULT;
+    FOV_VERTICAL = FOV_VERTICAL_DEFAULT;
 }

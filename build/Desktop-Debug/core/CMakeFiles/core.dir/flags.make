@@ -6,5 +6,5 @@ CXX_DEFINES = -DPARAGON_DEBUG -Dcore_EXPORTS
 
 CXX_INCLUDES = -I/home/ixnomad/code/Paragon -I/home/ixnomad/code/Paragon/core -I/home/ixnomad/code/Paragon/external/include -I/home/ixnomad/code/Paragon/common -I/home/ixnomad/code/Paragon/../external/include -I/home/ixnomad/code/Paragon/util
 
-CXX_FLAGS = -DQT_QML_DEBUG -g -std=gnu++20 -fPIC -fdiagnostics-color=always
+CXX_FLAGS = -DQT_QML_DEBUG -g -std=gnu++23 -fPIC -fdiagnostics-color=always
 

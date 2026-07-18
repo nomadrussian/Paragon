@@ -98,7 +98,7 @@
 			"sourceIndexes" : 
 			[
 				1,
-				9
+				10
 			]
 		}
 	],
@@ -124,8 +124,9 @@
 				6,
 				7,
 				8,
-				10,
-				11
+				9,
+				11,
+				12
 			]
 		},
 		{
@@ -133,7 +134,7 @@
 			"sourceIndexes" : 
 			[
 				1,
-				9
+				10
 			]
 		}
 	],
@@ -158,6 +159,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "common/Component.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "common/Config.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{

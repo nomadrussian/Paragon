@@ -1,0 +1,7 @@
+{
+    "APP_LOG_DIR_PATH": "data/log/ParagonApp/",
+    "CORE_ASSET_DIR_PATH": "data/asset/core/",
+    "APP_ASSET_DIR_PATH": "data/asset/ParagonApp/",
+    "APP_PREFAB_DIR_PATH": "data/prefab/ParagonApp",
+    "APP_SCENE_DIR_PATH": "data/scene"
+}

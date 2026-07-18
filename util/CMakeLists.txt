@@ -3,7 +3,8 @@ file(GLOB UTIL_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
 )
 
-add_library(util STATIC ${UTIL_SOURCES})
+add_library(util STATIC ${UTIL_SOURCES}
+    Math.cpp)
 
 set_target_properties(util PROPERTIES POSITION_INDEPENDENT_CODE ON)
 

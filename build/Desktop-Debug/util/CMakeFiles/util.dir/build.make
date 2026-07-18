@@ -111,11 +111,26 @@ util/CMakeFiles/util.dir/Log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/util.dir/Log.cpp.s"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/util && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ixnomad/code/Paragon/util/Log.cpp -o CMakeFiles/util.dir/Log.cpp.s
 
+util/CMakeFiles/util.dir/Math.cpp.o: util/CMakeFiles/util.dir/flags.make
+util/CMakeFiles/util.dir/Math.cpp.o: /home/ixnomad/code/Paragon/util/Math.cpp
+util/CMakeFiles/util.dir/Math.cpp.o: util/CMakeFiles/util.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object util/CMakeFiles/util.dir/Math.cpp.o"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/util && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT util/CMakeFiles/util.dir/Math.cpp.o -MF CMakeFiles/util.dir/Math.cpp.o.d -o CMakeFiles/util.dir/Math.cpp.o -c /home/ixnomad/code/Paragon/util/Math.cpp
+
+util/CMakeFiles/util.dir/Math.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/util.dir/Math.cpp.i"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/util && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ixnomad/code/Paragon/util/Math.cpp > CMakeFiles/util.dir/Math.cpp.i
+
+util/CMakeFiles/util.dir/Math.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/util.dir/Math.cpp.s"
+	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/util && /usr/bin/x86_64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ixnomad/code/Paragon/util/Math.cpp -o CMakeFiles/util.dir/Math.cpp.s
+
 # Object files for target util
 util_OBJECTS = \
 "CMakeFiles/util.dir/Debugger.cpp.o" \
 "CMakeFiles/util.dir/FileManager.cpp.o" \
-"CMakeFiles/util.dir/Log.cpp.o"
+"CMakeFiles/util.dir/Log.cpp.o" \
+"CMakeFiles/util.dir/Math.cpp.o"
 
 # External object files for target util
 util_EXTERNAL_OBJECTS =
@@ -123,9 +138,10 @@ util_EXTERNAL_OBJECTS =
 util/libutil.a: util/CMakeFiles/util.dir/Debugger.cpp.o
 util/libutil.a: util/CMakeFiles/util.dir/FileManager.cpp.o
 util/libutil.a: util/CMakeFiles/util.dir/Log.cpp.o
+util/libutil.a: util/CMakeFiles/util.dir/Math.cpp.o
 util/libutil.a: util/CMakeFiles/util.dir/build.make
 util/libutil.a: util/CMakeFiles/util.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libutil.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ixnomad/code/Paragon/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libutil.a"
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/util && $(CMAKE_COMMAND) -P CMakeFiles/util.dir/cmake_clean_target.cmake
 	cd /home/ixnomad/code/Paragon/build/Desktop-Debug/util && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/util.dir/link.txt --verbose=$(VERBOSE)
 

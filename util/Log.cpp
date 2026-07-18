@@ -6,7 +6,7 @@ std::string sqc_red = "\033[1;31m";
 std::string sqc_orange = "\033[38;5;208m";
 std::string sqc_reset = "\033[0m";
 
-void Logger::log(std::string msg, LogType T)
+void Logger::log(const std::string& msg, LogType T)
 {
     auto t = std::time(nullptr);
     auto current_t = std::localtime(&t);

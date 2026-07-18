@@ -1,33 +1,29 @@
 #include "ParagonConfig.hpp"
 
-#include <external/include/nlohmann_json.hpp>
 #include <util/Log.hpp>
 
-#include <fstream>
+#include <format>
 
-float ParagonConfig::TICKRATE = 60.0f;
-
-void ParagonConfig::loadConfig(std::string configFilePath)
+void ParagonConfig::loadConfig(const std::string& configFilePath)
 {
-    std::ifstream rawConfigData(configFilePath);
-    if (!rawConfigData)
+    loadConfigData(configFilePath);
+
+    loadValue("TICKRATE", TICKRATE);
+
+    if (TICKRATE < TICKRATE_MIN)
     {
-        log_error(std::string("Unable to open graphics config file ") + configFilePath);
-        return;
+        TICKRATE = TICKRATE_FALLBACK_DEFAULT;
+        log_warning(
+            std::format(
+                "Tickrate cannot be less than {}, switched to {}",
+                TICKRATE_MIN,
+                TICKRATE_FALLBACK_DEFAULT
+            )
+        );
     }
-
-    nlohmann::json configData;
-    try {
-        rawConfigData >> configData;
-    }  catch (const nlohmann::json::parse_error& e) {
-        log_error(std::string("Error parsing graphics config from ") + configFilePath);
-        return;
-    }
-
-    if (configData.contains("TICKRATE")) TICKRATE = configData["TICKRATE"].get<float>();
 }
 
 void ParagonConfig::resetToDefault()
 {
-    TICKRATE = 60.0f;
+    TICKRATE = TICKRATE_DEFAULT;
 }

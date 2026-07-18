@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/util.dir/FileManager.cpp.o.d"
   "CMakeFiles/util.dir/Log.cpp.o"
   "CMakeFiles/util.dir/Log.cpp.o.d"
+  "CMakeFiles/util.dir/Math.cpp.o"
+  "CMakeFiles/util.dir/Math.cpp.o.d"
   "libutil.a"
   "libutil.pdb"
 )

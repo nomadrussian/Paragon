@@ -1,1 +1,0 @@
-/usr/bin/x86_64-linux-gnu-g++ -DQT_QML_DEBUG -g CMakeFiles/ParagonEditorApp.dir/EditorInit.cpp.o -o ParagonEditorApp  ../common/libcommon.a ../ParagonApp/libcore.so ../util/libutil.a -llua5.4 

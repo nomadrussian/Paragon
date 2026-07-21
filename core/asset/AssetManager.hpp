@@ -4,18 +4,22 @@
 #include <common/Singleton.hpp>
 #include <util/Log.hpp>
 
-class AssetManager : public Singleton<AssetManager>
+#include "Asset.hpp"
+#include "AssetScanner.hpp"
+#include "AssetRegistryImpl.hpp"
+
+class AssetManager
 {
+private:
+    AssetScanner scanner;
 
 public:
+    AssetManager() = default;
 
-protected:
-    AssetManager();
-    ~AssetManager();
+    void loadAllAssetsMetadataToRegistry();
 
 private:
-    const Asset* findByID(AssetID ID) const;
-    const Asset* findByPath(const std::string& filePath) const;
+    void fixIDCollisions(std::vector<std::unique_ptr<Asset>>& assets);
 };
 
 #endif // ASSETMANAGER_HPP

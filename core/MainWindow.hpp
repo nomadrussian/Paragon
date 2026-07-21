@@ -22,7 +22,6 @@ private:
     void init();
 };
 
-
 /**************************************************************************/
 // Exception type
 class MainWindowInitException : public std::exception

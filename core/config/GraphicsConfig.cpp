@@ -4,10 +4,16 @@
 #include <util/Math.hpp>
 
 #include <algorithm>
+#include <format>
+#include <ranges>
 
-void GraphicsConfig::loadConfig(const std::string& configFilePath)
+void GraphicsConfig::loadConfig(const std::filesystem::path& configFilePath)
 {
-    loadConfigData(configFilePath);
+    if (!loadConfigData(configFilePath))
+    {
+        log_warning("Loading graphics config data aborted.");
+        return;
+    }
 
     loadValue("RESOLUTION_WIDTH", RESOLUTION.WIDTH);
     loadValue("RESOLUTION_HEIGHT", RESOLUTION.HEIGHT);
@@ -60,19 +66,16 @@ void GraphicsConfig::loadConfig(const std::string& configFilePath)
         );
     }
 
+    if (!std::ranges::contains(MSAA_AVAILABLE_OPTIONS, MSAA))
     {
-        auto it = std::find(MSAA_AVAILABLE_OPTIONS.begin(), MSAA_AVAILABLE_OPTIONS.end(), MSAA);
-        if (it == MSAA_AVAILABLE_OPTIONS.end())
-        {
-            MSAA = MSAA_FALLBACK_DEFAULT;
-            log_warning(
-                std::format(
-                    "Unsupported MSAA value (must be {}), switched to fallback default {}",
-                    MSAA_AVAILABLE_OPTIONS,
-                    MSAA_FALLBACK_DEFAULT
-                )
-            );
-        }
+        MSAA = MSAA_FALLBACK_DEFAULT;
+        log_warning(
+            std::format(
+                "Unsupported MSAA value (must be one of the following options: {:n}), switched to fallback default {}",
+                MSAA_AVAILABLE_OPTIONS,
+                MSAA_FALLBACK_DEFAULT
+            )
+        );
     }
 
     FOV_VERTICAL = Math::FOVHorizontalToFOVVertical(FOV_HORIZONTAL, ASPECT);

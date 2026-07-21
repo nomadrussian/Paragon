@@ -4,7 +4,7 @@
 #include <common/Config.hpp>
 
 #include <array>
-#include <string>
+#include <filesystem>
 
 struct Dimensions2D
 {
@@ -12,7 +12,7 @@ struct Dimensions2D
     unsigned HEIGHT;
 };
 
-class GraphicsConfig : public Config<GraphicsConfig>
+class GraphicsConfig final : public Config<GraphicsConfig>
 {
 public:
     static constexpr std::array<unsigned, 4> MSAA_AVAILABLE_OPTIONS = { 1, 2, 4, 8 };
@@ -56,12 +56,14 @@ public:
 
 #ifdef PARAGON_DEBUG
     static inline bool DEBUG_SCREEN = true;
+#else
+    static inline bool DEBUG_SCREEN = false;
 #endif
 
 public:
     GraphicsConfig() = delete;
 
-    static void loadConfig(const std::string& configFilePath);
+    static void loadConfig(const std::filesystem::path& configFilePath);
     static void resetToDefault();
 };
 

@@ -1,6 +1,14 @@
-file(GLOB COMMON_SOURCES
+file(GLOB COMMON_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/application/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/application/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/asset/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/asset/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ecs/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ecs/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/event/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/event/*.cpp"
 )
 
 add_library(common STATIC ${COMMON_SOURCES})

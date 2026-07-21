@@ -7,11 +7,11 @@
 #include <memory>
 
 #include "MainWindow.hpp"
+#include "asset/AssetManager.hpp"
 #include "input/InputHandler.hpp"
 #include "input/KeyboardListener.hpp"
 #include "input/MouseListener.hpp"
 #include "render/RenderHandler.hpp"
-
 
 class Core : public Singleton<Core>
 {
@@ -22,6 +22,8 @@ private:
     std::shared_ptr<KeyboardListener> keyboardListener;
     std::shared_ptr<MouseListener> mouseListener;
     std::unique_ptr<Application> applicationInstance;
+
+    std::unique_ptr<AssetManager> assetManager;
 
     float lastFrameTime = 0.0f;
     float deltaTime = 0.0f;
@@ -38,6 +40,7 @@ protected:
 
 private:
     void initGraphics();
+    void initAssetSystem();
 };
 
 #endif // CORE_HPP

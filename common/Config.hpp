@@ -1,22 +1,28 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
 
-#include <external/include/nlohmann_json.hpp>
 #include <util/Log.hpp>
+#include <util/file/JSON.hpp>
 
 #include <concepts>
+#include <filesystem>
 #include <fstream>
+#include <memory>
 #include <string>
 #include <type_traits>
+#include <utility>
 
 template<typename T>
-concept ConfigValueType = std::is_arithmetic_v<T> || std::is_same_v<T, std::string>;
+concept ConfigValueType =
+    std::is_arithmetic_v<std::remove_cvref_t<T>> ||
+    std::same_as<std::remove_cvref_t<T>, std::string> ||
+    std::same_as<std::remove_cvref_t<T>, std::filesystem::path>;
 
 template<typename Derived>
 class Config
 {
 protected:
-    static inline nlohmann::json configData;
+    static inline std::unique_ptr<json_data> configData;
 
 public:
     Config() = delete;
@@ -24,44 +30,61 @@ public:
     template<ConfigValueType T>
     static std::string configValueToString(const T& value)
     {
-        std::string s;
-
-        if constexpr (std::is_same_v<T, std::string>)
+        if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::string>)
         {
-            s = value;
+            return value;
         }
-        else if constexpr (std::is_same_v<T, bool>)
+        else if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::filesystem::path>)
         {
-            s = value ? "true" : "false";
+            return value.string();
+        }
+        else if constexpr (std::is_same_v<std::remove_cvref_t<T>, bool>)
+        {
+            return value ? "true" : "false";
         }
         else
         {
-            s = std::to_string(value);
+            return std::to_string(value);
         }
-
-        return s;
     }
 
 protected:
-    static void loadConfigData(const std::string& configFilePath)
+    static bool loadConfigData(const std::filesystem::path& configFilePath)
     {
+        std::unique_ptr<json_data> newConfigData = JSON::loadJSONData(configFilePath);
+
+        if (!configData)
+        {
+            log_warning(std::format("Failed to load config data from {}", configFilePath));
+            return false;
+        }
+
+        configData = std::move(newConfigData);
+
+        return true;
+
         std::ifstream rawConfigData(configFilePath);
         if (!rawConfigData)
         {
-            log_error(std::string("Unable to open config file ") + configFilePath);
-            return;
+            log_warning(std::string("Unable to open config file ") + configFilePath.string());
+            return false;
         }
+
+        nlohmann::json newConfigData;
 
         try
         {
-            rawConfigData >> Config<Derived>::configData;
+            rawConfigData >> newConfigData;
+            Config<Derived>::configData = std::move(newConfigData);
         }
         catch (const nlohmann::json::parse_error& e)
         {
-            log_error(std::string("Error parsing config from ") + configFilePath);
-            log_error(e.what());
-            return;
+            log_warning(std::string("Error parsing config from ") + configFilePath.string());
+            log_warning(e.what());
+            return false;
         }
+
+        return true;
     }
 
     template<ConfigValueType T>
@@ -71,11 +94,18 @@ protected:
 
         if (it != Config<Derived>::configData.end())
         {
-            outValue = it->template get<T>();
+            try
+            {
+                outValue = it->template get<T>();
+            }
+            catch (const nlohmann::json::exception& e)
+            {
+                log_warning(std::string("Unable to load config value \"") + valueName + std::string("\" ") + e.what());
+            }
         }
         else
         {
-            log_warning(std::string("Unable to find ") + valueName + std::string(" in config, using default \"") + configValueToString(outValue) + "\"");
+            log_warning(std::string("Unable to find ") + valueName + std::string(" in config, using current \"") + configValueToString(outValue) + "\"");
         }
     }
 };

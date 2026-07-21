@@ -1,16 +1,20 @@
 #include "ParagonApplication.hpp"
 
 #include <core/Core.hpp>
-#include <core/config/GraphicsConfig.hpp>
 #include <util/Log.hpp>
+#include <core/config/GraphicsConfig.hpp>
 
 #include <exception>
 #include <iostream>
 #include <memory>
 
-
 int main()
 {
+
+#ifdef _WIN32
+    Log::initConsoleColors();
+#endif
+
     std::unique_ptr<ParagonApplication> paragonApp = nullptr;
     Core *core = nullptr;
 

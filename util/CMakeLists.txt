@@ -1,10 +1,11 @@
-file(GLOB UTIL_SOURCES
+file(GLOB UTIL_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/file/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/file/*.hpp"
 )
 
-add_library(util STATIC ${UTIL_SOURCES}
-    Math.cpp)
+add_library(util STATIC ${UTIL_SOURCES})
 
 set_target_properties(util PROPERTIES POSITION_INDEPENDENT_CODE ON)
 

@@ -4,13 +4,12 @@
 #include <util/Log.hpp>
 
 #include <cassert>
+#include <memory>
 
 #include <GLFW/glfw3.h>
 
-#include "config/GraphicsConfig.hpp"
-#include "asset/AssetManager.hpp"
 #include "event/CoreEventManager.hpp"
-#include "render/RenderHandler.hpp"
+#include "config/GraphicsConfig.hpp"
 #include "render/ShaderManager.hpp"
 
 template<>
@@ -42,6 +41,9 @@ Core::Core()
     keyboardListener->init();
     mouseListener->init();
 
+    log_debug("Initializing asset system...");
+    initAssetSystem();
+
     log_debug("Core initialization has been completed");
 }
 
@@ -65,6 +67,17 @@ void Core::initGraphics()
     RenderHandler::init();
 
     log_debug("Graphics initialization has been completed");
+}
+
+void Core::initAssetSystem()
+{
+    log_debug("Setting up AssetManager...");
+    assetManager = std::make_unique<AssetManager>();
+
+    log_debug("Loading assets metadata to AssetRegistry...");
+    assetManager.loadAllAssetsMetadataToRegistry();
+
+    log_debug("Setting up asset system has been completed");
 }
 
 void Core::setApplicationInstance(std::unique_ptr<Application> applicationInstance)

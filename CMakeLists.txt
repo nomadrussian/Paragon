@@ -17,6 +17,11 @@ endif()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/ParagonApp")
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    cmake_path(NORMAL_PATH CMAKE_SOURCE_DIR OUTPUT_VARIABLE PROJECT_ROOT_NORMALIZED_PATH)
+    add_compile_options("-ffile-prefix-map=${PROJECT_ROOT_NORMALIZED_PATH}/=")
+endif()
+
 add_subdirectory(common)
 add_subdirectory(util)
 add_subdirectory(core)
